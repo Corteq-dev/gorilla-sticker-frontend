@@ -1,0 +1,7 @@
+{
+  "extends": ["stylelint-config-standard-scss", "stylelint-config-prettier-scss"],
+  "rules": {
+    "declaration-no-important": true,
+    "unit-disallowed-list": ["em", "rem"]
+  }
+}
