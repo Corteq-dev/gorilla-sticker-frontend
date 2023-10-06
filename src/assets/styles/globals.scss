@@ -5,3 +5,13 @@ body {
   box-sizing: border-box;
   max-width: 1280px;
 }
+
+:root.light {
+  --tg-theme-bg-color: #e0e0e0;
+  --tg-theme-text-color: #000001;
+  --tg-theme-hint-color: #99999a;
+  --tg-theme-link-color: #2481cc;
+  --tg-theme-button-color: #2481cc;
+  --tg-theme-button-text-color: #fffffe;
+  --tg-theme-secondary-bg-color: #fffffe;
+}
