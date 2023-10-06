@@ -6,7 +6,11 @@ export default function SearchBar() {
     <Container className={styles.wrapper}>
       <div className={styles.container}>
         <div className={styles.searchImage}></div>
-        <input className={styles.searchBar} type="text" placeholder="Search for stickers" />
+        <input
+          className={styles.searchBar}
+          type="text"
+          placeholder="Search for stickers"
+        />
         <div className={styles.infoBox}></div>
       </div>
     </Container>

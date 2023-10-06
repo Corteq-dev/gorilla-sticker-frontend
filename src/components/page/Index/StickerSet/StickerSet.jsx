@@ -1,10 +1,43 @@
-import { Row } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import styles from "./StickerSet.module.scss";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination, FreeMode } from "swiper/modules";
 
-export default function StickerSet({ name }) {
+export default function StickerSet({ stickerSet, className }) {
   return (
-    <div className={styles.container}>
-      <Row>{name}</Row>
-    </div>
+    <Row className={className}>
+      <Col lg={12} className={styles.header}>
+        <div className={styles.headerText}>
+          <a className={styles.name}>{stickerSet.name}</a>
+          <p className={styles.description}>{stickerSet.description}</p>
+        </div>
+      </Col>
+      <Col lg={12} className={styles.stickers}>
+        <Swiper
+          slidesPerView="auto"
+          spaceBetween={10}
+          freeMode={true}
+          grabCursor={true}
+          scrollbar={{
+            hide: true,
+          }}
+          modules={[Pagination, FreeMode]}
+        >
+          {stickerSet.stickersUrl &&
+            stickerSet.stickersUrl.map((item, index) => (
+              <SwiperSlide key={index} className={styles.slide}>
+                <img src={item} />
+              </SwiperSlide>
+            ))}
+        </Swiper>
+      </Col>
+      <Col lg={6} className={styles.footer}>
+        <a className={styles.button}>ADD</a>
+        <div className={styles.emojis}>
+          <div className={styles.emoji}>❤️ 123</div>
+          <div className={styles.emoji}>⭐ 123</div>
+        </div>
+      </Col>
+    </Row>
   );
 }

@@ -1,3 +1,12 @@
 .container {
   display: block;
 }
+
+.placeholder {
+  height: 40px;
+}
+
+.stickerSet {
+  margin-top: 40px;
+  border-bottom: 1px solid var(--tg-theme-hint-color-20);
+}
