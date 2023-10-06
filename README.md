@@ -74,15 +74,17 @@ pages/index.js is associated with the / route.
 
 pages/posts/first-post.js is associated with the /posts/first-post route.
 
-## Coding style 
+## Coding style
 
 Here we are following these rules:
 
 ### Styling (scss):
+
 - Whitespaces after each style
 - Only using `px`
 
 ### Js, Jsx
+
 - Standart prettier configuration
 
 ## Naming convention
@@ -132,7 +134,3 @@ _branched out from developer after closing the previous release, and merged back
 **hotfix** branches used to fix minor issues on live before the next release date.
 
 _branched out from master, and merged back into both master and the next release._
-
-
-
-
