@@ -2,13 +2,16 @@ import { Row, Col } from "react-bootstrap";
 import styles from "./StickerSet.module.scss";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, FreeMode } from "swiper/modules";
+import Link from "next/link";
 
 export default function StickerSet({ stickerSet, className }) {
   return (
     <Row className={className}>
       <Col lg={12} className={styles.header}>
         <div className={styles.headerText}>
-          <a className={styles.name}>{stickerSet.name}</a>
+          <Link href={`/details/${stickerSet.id}`} className={styles.name}>
+            {stickerSet.name}
+          </Link>
           <p className={styles.description}>{stickerSet.description}</p>
         </div>
       </Col>

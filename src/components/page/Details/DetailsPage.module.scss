@@ -1,0 +1,136 @@
+.container {
+  display: block;
+}
+
+.placeholder {
+  height: 70px;
+}
+
+.stickerSet {
+  margin-top: 40px;
+  border-bottom: 1px solid var(--tg-theme-hint-color-20);
+}
+
+.name {
+  border-bottom: 2px dotted var(--tg-theme-hint-color-20);
+  color: var(--tg-theme-text-color);
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.description {
+  color: var(--tg-theme-hint-color);
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.button {
+  color: var(--tg-theme-button-text-color);
+  background-color: var(--tg-theme-button-color);
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 8px 18px;
+  height: 33px;
+}
+
+.stickers {
+  margin-top: 50px;
+
+  & img {
+    width: 60px;
+    height: 60px;
+    margin: 16px 8px;
+  }
+}
+
+.footer {
+  width: 100%;
+  margin-top: 15px;
+  padding-bottom: 10px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.emojis {
+  display: flex;
+}
+
+.emoji {
+  background-color: var(--tg-theme-hint-button-hsl-color);
+  font-size: 12.8px;
+  line-height: 19.2px;
+  margin-right: 8px;
+  padding: 8px 16px;
+  user-select: none;
+  font-weight: 600;
+  border-radius: 16px;
+  color: var(--tg-theme-text-color);
+}
+
+.slide {
+  background-size: 500% 500%;
+  border-radius: 8px;
+  width: 60px;
+  height: 60px;
+}
+
+.buttons {
+  position: sticky;
+  bottom: 32px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  margin: 0 auto 32px;
+  max-width: calc(var(--app-max-width) - 32px);
+  width: calc(100% - 32px);
+  z-index: 99;
+}
+
+.buttonAdd {
+  background-color: var(--tg-theme-button-color);
+  border-radius: 160px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-left: 16px;
+  padding: 16px 18px;
+  -webkit-tap-highlight-color: transparent;
+  color: var(--tg-theme-button-text-color);
+  user-select: none;
+  letter-spacing: 1px;
+}
+
+.buttonShare {
+  -webkit-tap-highlight-color: transparent;
+  color: var(--tg-theme-button-text-color);
+  user-select: none;
+  background-color: var(--tg-theme-hint-color-20);
+  border-radius: 160px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-right: 16px;
+  padding: 16px 14px;
+  letter-spacing: 1px;
+}
+
+.recommendedText {
+  align-items: center;
+  color: var(--tg-theme-hint-color);
+  display: flex;
+  font-size: 16px;
+
+  div {
+    border-bottom: 1px solid var(--tg-theme-hint-color);
+    min-width: 50px;
+    width: 50%;
+  }
+
+  span {
+    display: block;
+    margin: auto;
+    min-width: 160px;
+    padding: 0 10px;
+    text-align: center;
+  }
+}
