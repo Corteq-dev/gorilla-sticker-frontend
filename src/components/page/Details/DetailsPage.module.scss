@@ -3,7 +3,7 @@
 }
 
 .placeholder {
-  height: 70px;
+  height: 130px;
 }
 
 .stickerSet {
@@ -57,7 +57,7 @@
 }
 
 .emoji {
-  background-color: var(--tg-theme-hint-button-hsl-color);
+  background-color: var(--tg-theme-bg-color);
   font-size: 12.8px;
   line-height: 19.2px;
   margin-right: 8px;
@@ -105,7 +105,7 @@
   -webkit-tap-highlight-color: transparent;
   color: var(--tg-theme-button-text-color);
   user-select: none;
-  background-color: var(--tg-theme-hint-color-20);
+  background-color: var(--tg-theme-bg-color);
   border-radius: 160px;
   font-size: 12px;
   font-weight: 600;

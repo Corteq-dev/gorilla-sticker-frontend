@@ -35,7 +35,12 @@ export default function StickerSet({ stickerSet, className }) {
         </Swiper>
       </Col>
       <Col lg={6} className={styles.footer}>
-        <a className={styles.button}>ADD</a>
+        <a
+          href={`https://t.me/addstickers/Yellowboi`}
+          className={styles.button}
+        >
+          ADD
+        </a>
         <div className={styles.emojis}>
           <div className={styles.emoji}>❤️ 123</div>
           <div className={styles.emoji}>⭐ 123</div>

@@ -5,6 +5,7 @@
   padding: 10px 8px;
   border: none;
   outline: none;
+  background-color: var(--tg-theme-secondary-bg-color);
 }
 
 .searchImage {
@@ -13,55 +14,78 @@
   background-position: center;
   padding-right: 40px;
   width: 0.5%;
-  background-color: white;
   height: inherit;
   border-radius: 10px 0 0 10px;
   margin-left: 10px;
+  background-color: var(--tg-theme-secondary-bg-color);
+  color: var(--tg-theme-secondary-bg-color);
 }
 
 .infoBox {
   height: inherit;
-  background-image: url("../../../assets/images/information.png");
   background-repeat: no-repeat;
   background-position: center;
   width: 3.5%;
   padding: 0 40px 0 6px;
   margin-right: 10px;
-  background-color: white;
   border-radius: 0 10px 10px 0;
   cursor: pointer;
+  background-color: var(--tg-theme-secondary-bg-color);
+
+  & svg {
+    height: inherit;
+    width: 18px;
+    fill: var(--tg-theme-hint-color);
+  }
 }
 
 .wrapper {
+  height: 66px;
+  width: 100%;
   display: flex;
   justify-content: center;
   flex-direction: column;
   background-color: var(--tg-theme-bg-color);
   position: fixed;
-  padding: 10px 0 0;
   z-index: 1001;
-  left: 50%;
-  transform: translateX(-50%);
+}
+
+.searchBarWrapper {
+  height: 100%;
+  z-index: 2;
+  background-color: var(--tg-theme-bg-color);
+  padding: 8px 0;
+  display: flex;
+  align-items: center;
 }
 
 .searchBar {
   width: 100%;
   display: flex;
-  height: inherit;
+  height: 41px;
 }
 
 .menuBox {
-  margin-top: 20px;
   width: 100%;
   display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  position: fixed;
+  height: 40px;
+  margin-top: 96px;
+  background-color: var(--tg-theme-bg-color);
+  transition: 0.5s linear;
+  z-index: 1;
 }
 
-.menuBoxHiden{
+.menuBoxHiden {
+  position: fixed;
   margin-top: 20px;
   width: 100%;
   display: flex;
-  top: -100px;
-  transition: 0.3s linear;
+  top: -40px;
+  transition: 0.5s linear;
 }
 
 .menuItemBox {
