@@ -1,20 +1,21 @@
 
-.NameLinkBox{
+.nameLinkBox{
     display: flex;
     width: 70%;
     font-size: 20px;
     padding-bottom: 15px;
 }
 
-.AboutBox{
+.aboutBox{
   padding-bottom: 20px;
+  font-size: 35px;
 }
 
-.LinkName{
+.linkName{
   padding-right: 10px;
 }
 
-.Navigation{
+.navigation{
   width: 100%;
   flex-direction: row;
   display: flex;
@@ -25,7 +26,7 @@
 }
 
 
-.TermsWrapper{
+.termsWrapper{
   height: inherit;
   display: flex;
   flex-direction: column;

@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import styles from "./InfoBox.module.scss";
+import styles from "./InfoPage.module.scss";
 import { router } from "next/client";
 
-const InfoBox = () => {
+const InfoPage = () => {
   const router = useRouter();
   return (
     <div className={styles.wrapper}>
-      <div className={styles.Navigation}>
+      <div className={styles.navigation}>
         <div>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -27,38 +27,40 @@ const InfoBox = () => {
           </svg>
         </div>
       </div>
-      <div className={styles.AboutBox}>
-        <h1>ABOUT</h1>
-      </div>
-      <div className={styles.NameLinkBox}>
-        <div className={styles.LinkName}>Telegram bot: </div>
+      <p className={styles.aboutBox}>
+        <b>ABOUT</b>
+      </p>
+      <div className={styles.nameLinkBox}>
+        <p className={styles.linkName}>Telegram bot: </p>
         <a href={"#"}>botName</a>
       </div>
-      <div className={styles.NameLinkBox}>
-        <div className={styles.LinkName}>Support chat: </div>
+      <div className={styles.nameLinkBox}>
+        <p className={styles.linkName}>Support chat: </p>
         <a href={"#"}>SupportChat</a>
       </div>
-      <div className={styles.NameLinkBox}>
-        <div className={styles.LinkName}>Mail: </div>
+      <div className={styles.nameLinkBox}>
+        <p className={styles.linkName}>Mail: </p>
         <a href={"#"}>Mail</a>
       </div>
-      <div className={styles.NameLinkBox}>
-        <div className={styles.LinkName}>Site: </div>
+      <div className={styles.nameLinkBox}>
+        <p className={styles.linkName}>Site: </p>
         <a href={"#"}>Site</a>
       </div>
-      <div className={styles.NameLinkBox}>
-        <div className={styles.LinkName}>Terms: </div>
+      <div className={styles.nameLinkBox}>
+        <p className={styles.linkName}>Terms: </p>
         <a href={"#"}> Terms</a>
       </div>
-      <div className={styles.NameLinkBox}>
-        <div className={styles.LinkName}>Github: </div>
+      <div className={styles.nameLinkBox}>
+        <p className={styles.linkName}>Github: </p>
         <a href={"#"}>Github </a>
       </div>
-      <div className={styles.TermsWrapper}>
+      <div className={styles.termsWrapper}>
         <div>
-          <h1>TERMS OF USE</h1>
+          <p className={styles.aboutBox}>
+            <b>TERMS OF USE</b>
+          </p>
         </div>
-        <div>
+        <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec luctus
           magna nisl, non placerat nisl tincidunt nec. Interdum et malesuada
           fames ac ante ipsum primis in faucibus. Praesent ornare suscipit mi,
@@ -135,10 +137,10 @@ const InfoBox = () => {
           inceptos himenaeos. Aenean porttitor, nulla vitae ornare pretium,
           tellus massa ullamcorper nisl, et pharetra ante massa quis lorem.
           Pellentesque consequat convallis posuere.
-        </div>
+        </p>
       </div>
     </div>
   );
 };
 
-export default InfoBox;
+export default InfoPage;
