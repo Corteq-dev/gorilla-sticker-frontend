@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 
 const SearchBar = () => {
   const [show, setShow] = useState(true);
-  const [isNew,setIsNew] = useState(true);
+  const [isNew, setIsNew] = useState(true);
   const [pageOffsetY, setPageOffsetY] = useState(0);
   const router = useRouter();
   const controlNavbar = () => {
@@ -26,10 +26,8 @@ const SearchBar = () => {
   }, [pageOffsetY]);
 
   useEffect(() => {
-    setIsNew(window.location.pathname === "/")
+    setIsNew(window.location.pathname === "/");
   }, []);
-
-
 
   return (
     <div className={styles.wrapper}>
@@ -53,16 +51,29 @@ const SearchBar = () => {
           show == false ? `${styles.menuBoxHiden}` : ""
         }`}
       >
-        <div onClick={() => router.push("/")} className={styles.menuItemBox + " " + (isNew == true ? styles.active  : "")}>
+        <div
+          onClick={() => router.push("/")}
+          className={
+            styles.menuItemBox + " " + (isNew == true ? styles.active : "")
+          }
+        >
           New
         </div>
         <div
           onClick={() => router.push("/popular")}
-          className={styles.menuItemBox  + " " + (isNew == false ? styles.active  : "") }
+          className={
+            styles.menuItemBox + " " + (isNew == false ? styles.active : "")
+          }
         >
           Popular
         </div>
-        <span className={styles.scrollBar + " " + (isNew == false ? styles.moveLeft : styles.moveRight )}></span>
+        <span
+          className={
+            styles.scrollBar +
+            " " +
+            (isNew == false ? styles.moveLeft : styles.moveRight)
+          }
+        ></span>
       </div>
     </div>
   );
