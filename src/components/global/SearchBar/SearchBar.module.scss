@@ -72,7 +72,7 @@
   align-items: center;
   justify-content: space-around;
   position: fixed;
-  height: 40px;
+  height: 38px;
   margin-top: 96px;
   background-color: var(--tg-theme-bg-color);
   transition: 0.3s linear;
@@ -95,3 +95,29 @@
   height: 36px;
   color: #99999a;
 }
+
+.active{
+  color: #2481cc;
+}
+
+.scrollBar{
+  position: absolute;
+  width: 50%;
+  border:2px solid #2481cc;
+  border-radius: 10px;
+  top: 35px;
+  height: 1px;
+  z-index: 1001;
+
+}
+
+.moveLeft{
+  left: 50%;
+  transition: left 1s ease;
+}
+
+.moveRight{
+  left: 0;
+  transition: left 1s ease;
+}
+
