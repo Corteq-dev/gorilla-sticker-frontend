@@ -107,7 +107,9 @@
   border-radius: 10px;
   top: 35px;
   height: 1px;
+  left: 0;
   z-index: 1001;
+  transition: 1s;
 
 }
 
@@ -120,4 +122,3 @@
   left: 0;
   transition: left 1s ease;
 }
-
