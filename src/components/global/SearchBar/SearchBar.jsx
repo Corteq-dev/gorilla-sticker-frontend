@@ -7,12 +7,11 @@ const SearchBar = () => {
   const [isNew, setIsNew] = useState(true);
   const [pageOffsetY, setPageOffsetY] = useState(0);
   const router = useRouter();
-  const [style , setStyle] = useState({})
+  const [style, setStyle] = useState({});
   const controlNavbar = () => {
     setShow(window.scrollY < pageOffsetY);
     setPageOffsetY(window.scrollY);
   };
-
 
   useEffect(() => {
     window.addEventListener("scroll", controlNavbar);
@@ -22,9 +21,9 @@ const SearchBar = () => {
     };
   }, [pageOffsetY]);
 
-   useEffect(() => {
-     setIsNew(window.location.pathname === "/");
-   }, []);
+  useEffect(() => {
+    setIsNew(window.location.pathname === "/");
+  }, []);
 
   return (
     <div className={styles.wrapper}>
@@ -65,10 +64,13 @@ const SearchBar = () => {
           Popular
         </div>
         <span
-            className={styles.scrollBar  + " " + (isNew == false ? styles.moveLeft : styles.moveRight)}
+          className={
+            styles.scrollBar +
+            " " +
+            (isNew == false ? styles.moveLeft : styles.moveRight)
+          }
         ></span>
       </div>
-
     </div>
   );
 };
