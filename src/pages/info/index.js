@@ -9,7 +9,9 @@ export default function Info() {
     script.async = true;
 
     script.addEventListener("load", () => {
-      document.querySelector("html").classList.add(window.Telegram.WebApp.colorScheme);
+      document
+        .querySelector("html")
+        .classList.add(window.Telegram.WebApp.colorScheme);
     });
 
     document.body.appendChild(script);
