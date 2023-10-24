@@ -4,9 +4,7 @@ import axios from "axios";
 export async function GetLocale() {
   return retry(10, async () => {
     const res = await axios.get(
-      APIConfigs.GorillaSticker.url +
-        "/locale?userId=" +
-        window.Telegram.WebApp.initDataUnsafe.user.id,
+      APIConfigs.GorillaSticker.url + "/locale?userId=" + window.Telegram.WebApp.initDataUnsafe.user.id
     );
     localStorage.setItem("locale", ...res.data);
     return res.data;
@@ -22,17 +20,13 @@ export async function GetNewStickers(offset = 0, limit = 10) {
         "&offset=" +
         offset +
         "&limit=" +
-        limit,
+        limit
     );
     return res.data;
   });
 }
 
-export async function GetPopularStickers(
-  offset = 0,
-  limit = 10,
-  dateFilter = new Date(),
-) {
+export async function GetPopularStickers(offset = 0, limit = 10, dateFilter = new Date()) {
   return retry(10, async () => {
     const res = await axios.get(
       APIConfigs.GorillaSticker.url +
@@ -43,7 +37,7 @@ export async function GetPopularStickers(
         "&limit=" +
         limit +
         "&dateFilter=" +
-        dateFilter,
+        dateFilter
     );
     return res.data;
   });
@@ -60,7 +54,7 @@ export async function Search(text, offset = 0, limit = 10) {
         "&limit=" +
         limit +
         "&text=" +
-        text,
+        text
     );
     return res.data;
   });
@@ -77,7 +71,7 @@ export async function SendActionData(actions) {
       headers: {
         "Content-Type": "application/json",
       },
-    },
+    }
   );
 }
 
