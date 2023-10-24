@@ -1,32 +1,29 @@
-
-.nameLinkBox{
-    display: flex;
-    width: 70%;
-    font-size: 20px;
-    padding-bottom: 15px;
+.nameLinkBox {
+  display: flex;
+  width: 70%;
+  font-size: 20px;
+  padding-bottom: 15px;
 }
 
-.aboutBox{
+.aboutBox {
   padding-bottom: 20px;
   font-size: 35px;
 }
 
-.linkName{
+.linkName {
   padding-right: 10px;
 }
 
-.navigation{
+.navigation {
   width: 100%;
   flex-direction: row;
   display: flex;
   vertical-align: after-edge;
   justify-content: space-between;
   padding: 20px 0;
-
 }
 
-
-.termsWrapper{
+.termsWrapper {
   height: inherit;
   display: flex;
   flex-direction: column;
@@ -34,6 +31,6 @@
   padding-top: 400px;
 }
 
-.colorChange{
+.colorChange {
   fill: var(--tg-theme-hint-color);
 }
