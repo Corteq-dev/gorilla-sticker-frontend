@@ -56,6 +56,7 @@ You can start editing the page by modifying `pages/index.js`. The page auto-upda
 │   │   │   └── ...
 │   ├── pages                   <---- (All pages)
 │   │   ├── _app_.js
+│   │   ├── _document.js
 │   │   └── index.js
 │   ├── utils                   <---- (Global utilities)
 │   │   └── index.js
