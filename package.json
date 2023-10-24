@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "build": "prettier --check . && stylelint --allow-empty-input \"**/*.{css,scss}\" && next build",
+    "build": "next build",
     "dev": "next dev",
     "start": "next start",
     "lint": "npm run lint:js && npm run lint:css",
