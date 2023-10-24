@@ -13,6 +13,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "axios": "^1.5.1",
     "bootstrap": "^5.3.2",
     "next": "latest",
     "react": "18.2.0",

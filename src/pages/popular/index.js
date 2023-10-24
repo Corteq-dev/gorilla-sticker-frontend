@@ -10,12 +10,16 @@ export default function Home() {
     script.async = true;
 
     script.addEventListener("load", () => {
-      document
-        .querySelector("html")
-        .classList.add(window.Telegram.WebApp.colorScheme);
+      document.querySelector("html").classList.add(window.Telegram.WebApp.colorScheme);
     });
 
     document.body.appendChild(script);
+
+    const locale = localStorage.getItem("locale");
+    if (locale) {
+    } else {
+      //locale = DefaultAPI.GetLocale();
+    }
 
     return () => {
       document.body.removeChild(script);
