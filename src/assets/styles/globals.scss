@@ -1,5 +1,191 @@
 html,
 body {
   padding: 0;
+  margin: auto;
+  box-sizing: border-box;
+  /* stylelint-disable-next-line declaration-no-important */
+  background-color: var(--tg-theme-secondary-bg-color) !important;
+  /* stylelint-disable-next-line declaration-no-important */
+  color: var(--tg-theme-text-color) !important;
+}
+
+:root.light {
+  --tg-theme-bg-color: #e0e0e0;
+  --tg-theme-text-color: #000001;
+  --tg-theme-hint-color: #99999a;
+  --tg-theme-link-color: #2481cc;
+  --tg-theme-button-color: #2481cc;
+  --tg-theme-button-text-color: #fffffe;
+  --tg-theme-secondary-bg-color: #fffffe;
+}
+
+:root.dark {
+  --tg-theme-bg-color: #181819;
+  --tg-theme-button-color: #50a8eb;
+  --tg-theme-button-text-color: #fffffe;
+  --tg-theme-hint-color: #7d7d7d;
+  --tg-theme-link-color: #57a7e0;
+  --tg-theme-secondary-bg-color: #000001;
+  --tg-theme-text-color: #fffffe;
+}
+
+/*
+@media (prefers-color-scheme: dark) {
+  :root {
+    --tg-theme-bg-color: #181819;
+    --tg-theme-button-color: #50a8eb;
+    --tg-theme-button-text-color: #fffffe;
+    --tg-theme-hint-color: #7d7d7d;
+    --tg-theme-link-color: #57a7e0;
+    --tg-theme-secondary-bg-color: #000001;
+    --tg-theme-text-color: #fffffe;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --tg-theme-bg-color: #e0e0e0;
+    --tg-theme-text-color: #000001;
+    --tg-theme-hint-color: #99999a;
+    --tg-theme-link-color: #2481cc;
+    --tg-theme-button-color: #2481cc;
+    --tg-theme-button-text-color: #fffffe;
+    --tg-theme-secondary-bg-color: #fffffe;
+  }
+}
+*/
+
+a {
+  /* stylelint-disable-next-line declaration-no-important */
+  text-decoration: none !important;
+}
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
   margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote::before,
+blockquote::after,
+q::before,
+q::after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
 }

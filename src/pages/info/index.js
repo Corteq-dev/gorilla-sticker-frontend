@@ -1,10 +1,8 @@
-import IndexPage from "../components/page/Index/IndexPage";
-import { StickerProvider } from "../contexts/StickerContext";
-import SearchBar from "../components/global/SearchBar/SearchBar";
+import InfoPage from "../../components/page/Info/InfoPage.jsx";
 import { useEffect } from "react";
-import DefaultAPI from "../apis/DefaultAPI";
+import { Container } from "react-bootstrap";
 
-export default function Home() {
+export default function Info() {
   useEffect(() => {
     const script = document.createElement("script");
     script.src = "https://telegram.org/js/telegram-web-app.js";
@@ -12,7 +10,6 @@ export default function Home() {
 
     script.addEventListener("load", () => {
       document.querySelector("html").classList.add(window.Telegram.WebApp.colorScheme);
-      console.log(window.Telegram);
     });
 
     document.body.appendChild(script);
@@ -20,18 +17,16 @@ export default function Home() {
     const locale = localStorage.getItem("locale");
     if (locale) {
     } else {
-      //let locale2 = DefaultAPI.GetLocale();
+      //locale = DefaultAPI.GetLocale();
     }
 
     return () => {
       document.body.removeChild(script);
     };
   }, []);
-
   return (
-    <StickerProvider>
-      <SearchBar />
-      <IndexPage />
-    </StickerProvider>
+    <Container>
+      <InfoPage></InfoPage>
+    </Container>
   );
 }

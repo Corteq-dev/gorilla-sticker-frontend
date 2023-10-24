@@ -1,3 +1,73 @@
-.container {
-  display: block;
+.headerText {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.name {
+  border-bottom: 2px dotted var(--tg-theme-hint-color-20);
+  color: var(--tg-theme-text-color);
+  font-size: 18px;
+  font-weight: 500;
+  overflow: visible;
+  white-space: nowrap;
+}
+
+.description {
+  color: var(--tg-theme-hint-color);
+  font-size: 16px;
+  height: 24px;
+  margin-bottom: 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.button {
+  color: var(--tg-theme-button-text-color);
+  background-color: var(--tg-theme-button-color);
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 8px 18px;
+  height: 33px;
+}
+
+.stickers {
+  margin-top: 15px;
+
+  & img {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+.footer {
+  width: 100%;
+  margin-top: 15px;
+  padding-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.emojis {
+  display: flex;
+}
+
+.emoji {
+  background-color: var(--tg-theme-bg-color);
+  font-size: 12.8px;
+  line-height: 19.2px;
+  margin-right: 8px;
+  padding: 8px 16px;
+  user-select: none;
+  font-weight: 600;
+  border-radius: 16px;
+  color: var(--tg-theme-text-color);
+}
+
+.slide {
+  background-size: 500% 500%;
+  border-radius: 8px;
+  width: 60px;
+  height: 60px;
 }

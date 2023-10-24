@@ -1,0 +1,124 @@
+.searchBox {
+  width: 100%;
+  height: inherit;
+  font-size: 14px;
+  padding: 10px 8px;
+  border: none;
+  outline: none;
+  background-color: var(--tg-theme-secondary-bg-color);
+}
+
+.searchImage {
+  background-image: url("../../../assets/images/searching.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  padding-right: 40px;
+  width: 0.5%;
+  height: inherit;
+  border-radius: 10px 0 0 10px;
+  margin-left: 10px;
+  background-color: var(--tg-theme-secondary-bg-color);
+  color: var(--tg-theme-secondary-bg-color);
+}
+
+.infoBox {
+  height: inherit;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 3.5%;
+  padding: 0 40px 0 6px;
+  margin-right: 10px;
+  border-radius: 0 10px 10px 0;
+  cursor: pointer;
+  background-color: var(--tg-theme-secondary-bg-color);
+
+  & svg {
+    height: inherit;
+    width: 18px;
+    fill: var(--tg-theme-hint-color);
+  }
+}
+
+.wrapper {
+  height: 66px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background-color: var(--tg-theme-bg-color);
+  position: fixed;
+  z-index: 1001;
+}
+
+.searchBarWrapper {
+  height: 100%;
+  z-index: 2;
+  background-color: var(--tg-theme-bg-color);
+  padding: 8px 0;
+  display: flex;
+  align-items: center;
+}
+
+.searchBar {
+  width: 100%;
+  display: flex;
+  height: 41px;
+}
+
+.menuBox {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  position: fixed;
+  height: 38px;
+  margin-top: 96px;
+  background-color: var(--tg-theme-bg-color);
+  transition: 0.3s linear;
+  z-index: 1;
+}
+
+.menuBoxHiden {
+  position: fixed;
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  top: -40px;
+  transition: 0.5s linear;
+}
+
+.menuItemBox {
+  width: 50%;
+  justify-content: center;
+  text-align: center;
+  height: 36px;
+  color: #99999a;
+}
+
+.active{
+  color: #2481cc;
+}
+
+.scrollBar{
+  position: absolute;
+  width: 50%;
+  border:2px solid #2481cc;
+  border-radius: 10px;
+  top: 35px;
+  height: 1px;
+  left: 0;
+  z-index: 1001;
+  transition: 1s;
+
+}
+
+.moveLeft{
+  left: 50%;
+  transition: left 1s ease;
+}
+
+.moveRight{
+  left: 0;
+  transition: left 1s ease;
+}

@@ -1,8 +1,7 @@
-import IndexPage from "../components/page/Index/IndexPage";
-import { StickerProvider } from "../contexts/StickerContext";
-import SearchBar from "../components/global/SearchBar/SearchBar";
+import IndexPage from "/src/components/page/Index/IndexPage";
+import { StickerProvider } from "/src/contexts/StickerContext";
+import SearchBar from "/src/components/global/SearchBar/SearchBar";
 import { useEffect } from "react";
-import DefaultAPI from "../apis/DefaultAPI";
 
 export default function Home() {
   useEffect(() => {
@@ -12,7 +11,6 @@ export default function Home() {
 
     script.addEventListener("load", () => {
       document.querySelector("html").classList.add(window.Telegram.WebApp.colorScheme);
-      console.log(window.Telegram);
     });
 
     document.body.appendChild(script);
@@ -20,7 +18,7 @@ export default function Home() {
     const locale = localStorage.getItem("locale");
     if (locale) {
     } else {
-      //let locale2 = DefaultAPI.GetLocale();
+      //locale = DefaultAPI.GetLocale();
     }
 
     return () => {

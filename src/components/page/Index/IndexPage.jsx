@@ -2,18 +2,20 @@ import { useEffect, useState } from "react";
 import styles from "./IndexPage.module.scss";
 import StickerSet from "./StickerSet/StickerSet";
 import { Container } from "react-bootstrap";
+import { useStickers } from "../../../contexts/StickerContext";
 
 export default function IndexPage() {
-  const [stickersets, setStickersets] = useState([
-    { id: 0, name: "asd" },
-    { id: 1, name: "asd2" },
-    { id: 3, name: "asd3" },
-  ]);
+  const { stickerSets } = useStickers();
 
   return (
     <Container className={styles.container}>
-      {stickersets.map((item) => (
-        <StickerSet name={item.name} key={item.id} />
+      <div className={styles.placeholder}></div>
+      {stickerSets.map((item) => (
+        <StickerSet
+          stickerSet={item}
+          key={item.id}
+          className={styles.stickerSet}
+        />
       ))}
     </Container>
   );
