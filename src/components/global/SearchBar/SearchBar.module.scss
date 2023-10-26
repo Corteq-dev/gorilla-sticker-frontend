@@ -94,31 +94,31 @@
   text-align: center;
   height: 36px;
   color: #99999a;
+  cursor: pointer;
 }
 
-.active{
+.active {
   color: #2481cc;
 }
 
-.scrollBar{
+.scrollBar {
   position: absolute;
   width: 50%;
-  border:2px solid #2481cc;
+  border: 2px solid #2481cc;
   border-radius: 10px;
   top: 35px;
   height: 1px;
   left: 0;
   z-index: 1001;
-  transition: 1s;
-
+  transition: 0.5s;
 }
 
-.moveLeft{
+.moveLeft {
   left: 50%;
-  transition: left 1s ease;
+  transition: left 0.5s ease;
 }
 
-.moveRight{
+.moveRight {
   left: 0;
-  transition: left 1s ease;
+  transition: left 0.5s ease;
 }

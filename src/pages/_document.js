@@ -17,6 +17,7 @@ export default function Document() {
         <meta property="og:description" content="Description template" />
         <meta property="og:image" content="/favicon.ico" />
         <meta property="og:url" content="/" />
+        <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests" />
       </Head>
       <body>
         <Main />

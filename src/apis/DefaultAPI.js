@@ -3,14 +3,9 @@ import axios from "axios";
 
 export default class DefaultAPI {
   static async GetLocale() {
-    const userId = localStorage.getItem("uId"); // TODO: Get this from Telegram API
-    /*const res = await axios.get(
-      APIConfigs.GorillaSticker.url + "/locale?userId=" + APIConfigs.GorillaSticker.defaultUserId
-    ); //+ userId);*/
-    const res = await fetch(
-      APIConfigs.GorillaSticker.url +
-        "/locale?userId=" +
-        APIConfigs.GorillaSticker.defaultUserId,
+    const userId = localStorage.getItem("uId");
+    const res = await axios.get(
+      APIConfigs.GorillaSticker.url + "/locale?userId=" + window.Telegram.WebApp.initDataUnsafe.user.id
     );
     console.log(res);
     localStorage.setItem("locale", ...res.data);
@@ -18,7 +13,7 @@ export default class DefaultAPI {
   }
 
   static async GetNewStickers(offset, limit) {
-    const userId = localStorage.getItem("uId"); // TODO: Get this from Telegram API
+    const userId = localStorage.getItem("uId");
     const res = await axios.get(
       APIConfigs.GorillaSticker.url +
         "/locale?userId=" +
@@ -26,9 +21,8 @@ export default class DefaultAPI {
         "&offset=" +
         offset +
         "&limit=" +
-        limit,
+        limit
     );
-    console.log(res);
     localStorage.setItem("locale", ...res.data);
     return res.data;
   }

@@ -1,6 +1,6 @@
 const APIConfigs = {
   GorillaSticker: {
-    url: "http://185.18.55.159:8082",
+    url: "https://gorillastickersbot.xyz:8443",
     defaultUserId: "895348126",
   },
 };
