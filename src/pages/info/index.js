@@ -1,6 +1,8 @@
 import InfoPage from "../../components/page/Info/InfoPage.jsx";
-import { useEffect } from "react";
+import "../18n";
+import { Suspense, useEffect } from "react";
 import { Container } from "react-bootstrap";
+import SearchBar from "../../components/global/SearchBar/SearchBar";
 
 export default function Info() {
   useEffect(() => {
@@ -26,7 +28,10 @@ export default function Info() {
   }, []);
   return (
     <Container>
-      <InfoPage></InfoPage>
+      <Suspense>
+        <InfoPage></InfoPage>
+      </Suspense>
+
     </Container>
   );
 }

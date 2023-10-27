@@ -1,7 +1,8 @@
 import IndexPage from "../components/page/Index/IndexPage";
 import { StickerProvider } from "../contexts/StickerContext";
 import SearchBar from "../components/global/SearchBar/SearchBar";
-import { useEffect } from "react";
+import "../18n";
+import { Suspense, useEffect } from "react";
 import DefaultAPI from "../apis/DefaultAPI";
 
 export default function Home() {
@@ -30,7 +31,9 @@ export default function Home() {
 
   return (
     <StickerProvider>
-      <SearchBar />
+      <Suspense>
+        <SearchBar />
+      </Suspense>
       <IndexPage />
     </StickerProvider>
   );
