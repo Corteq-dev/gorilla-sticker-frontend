@@ -8,7 +8,9 @@ export default class DefaultAPI {
       APIConfigs.GorillaSticker.url + "/locale?userId=" + APIConfigs.GorillaSticker.defaultUserId
     ); //+ userId);*/
     const res = await fetch(
-      APIConfigs.GorillaSticker.url + "/locale?userId=" + APIConfigs.GorillaSticker.defaultUserId
+      APIConfigs.GorillaSticker.url +
+        "/locale?userId=" +
+        APIConfigs.GorillaSticker.defaultUserId,
     );
     console.log(res);
     localStorage.setItem("locale", ...res.data);
@@ -24,7 +26,7 @@ export default class DefaultAPI {
         "&offset=" +
         offset +
         "&limit=" +
-        limit
+        limit,
     );
     console.log(res);
     localStorage.setItem("locale", ...res.data);
