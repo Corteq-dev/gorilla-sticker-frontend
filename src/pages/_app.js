@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "swiper/css";
 import "swiper/css/pagination";
 import { useEffect } from "react";
-import DefaultAPI from "../apis/DefaultAPI";
+import { GetLocale } from "../apis/DefaultAPI";
 
 export default function App({ Component, pageProps }) {
   useEffect(() => {
@@ -13,11 +13,14 @@ export default function App({ Component, pageProps }) {
 
     script.addEventListener("load", () => {
       document.querySelector("html").classList.add(window.Telegram.WebApp.colorScheme);
+      const uId = localStorage.getItem("uId");
+      if (!uId || uId != window.Telegram.WebApp.initDataUnsafe.user.id)
+        localStorage.setItem("uId", window.Telegram.WebApp.initDataUnsafe.user.id);
 
       let locale = localStorage.getItem("locale");
       if (locale) {
       } else {
-        locale = DefaultAPI.GetLocale();
+        locale = GetLocale();
       }
     });
 
