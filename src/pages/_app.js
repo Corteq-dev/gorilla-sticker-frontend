@@ -12,10 +12,15 @@ export default function App({ Component, pageProps }) {
     script.async = true;
 
     script.addEventListener("load", () => {
-      document.querySelector("html").classList.add(window.Telegram.WebApp.colorScheme);
+      document
+        .querySelector("html")
+        .classList.add(window.Telegram.WebApp.colorScheme);
       const uId = localStorage.getItem("uId");
       if (!uId || uId != window.Telegram.WebApp.initDataUnsafe.user.id)
-        localStorage.setItem("uId", window.Telegram.WebApp.initDataUnsafe.user.id);
+        localStorage.setItem(
+          "uId",
+          window.Telegram.WebApp.initDataUnsafe.user.id,
+        );
 
       let locale = localStorage.getItem("locale");
       if (locale) {

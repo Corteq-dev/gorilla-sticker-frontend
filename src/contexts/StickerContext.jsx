@@ -18,7 +18,18 @@ export function StickerProvider({ children }) {
       id: 1,
       description:
         "Лето и сезон отпусков потихоньку подходит к концу, и Хопперспешит наверстать упущенное. Заскакивайте и вы в последний вагон, чтобы провести остатки",
-      stickersUrl: [testUrl, testUrl, testUrl, testUrl, testUrl, testUrl, testUrl, testUrl, testUrl, testUrl],
+      stickersUrl: [
+        testUrl,
+        testUrl,
+        testUrl,
+        testUrl,
+        testUrl,
+        testUrl,
+        testUrl,
+        testUrl,
+        testUrl,
+        testUrl,
+      ],
     });
   }
 

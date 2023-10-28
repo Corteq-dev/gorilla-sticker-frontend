@@ -4,7 +4,9 @@ import axios from "axios";
 export async function GetLocale() {
   return retry(10, async () => {
     const res = await axios.get(
-      APIConfigs.GorillaSticker.url + "/locale?userId=" + window.Telegram.WebApp.initDataUnsafe.user.id
+      APIConfigs.GorillaSticker.url +
+        "/locale?userId=" +
+        window.Telegram.WebApp.initDataUnsafe.user.id,
     );
     console.log(res);
     localStorage.setItem("locale", ...res.data);
@@ -21,7 +23,7 @@ export async function GetNewStickers(offset = 0, limit = 10) {
         "&offset=" +
         offset +
         "&limit=" +
-        limit
+        limit,
     );
     console.log(res.data);
     return res.data;

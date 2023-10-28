@@ -21,7 +21,13 @@ export default function IndexPage() {
     <Container className={styles.container}>
       <div className={styles.placeholder}></div>
       {stickerSets &&
-        stickerSets.map((item) => <StickerSet stickerSet={item} key={item.id} className={styles.stickerSet} />)}
+        stickerSets.map((item) => (
+          <StickerSet
+            stickerSet={item}
+            key={item.id}
+            className={styles.stickerSet}
+          />
+        ))}
     </Container>
   );
 }
