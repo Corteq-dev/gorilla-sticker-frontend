@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
-
 import styles from "./SearchBar.module.scss";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
+import { Search } from "../../../apis/DefaultAPI";
+
 const SearchBar = () => {
   const [show, setShow] = useState(true);
   const [isNew, setIsNew] = useState(true);
   const [pageOffsetY, setPageOffsetY] = useState(0);
+  const [searchText, setSearchText] = useState("");
+  let searchDelayTimer = null;
   const router = useRouter();
   const { t } = useTranslation();
 
@@ -27,6 +30,14 @@ const SearchBar = () => {
     setIsNew(window.location.pathname === "/");
   }, []);
 
+  useEffect(() => {
+    clearTimeout(searchDelayTimer);
+
+    searchDelayTimer = setTimeout(async () => {
+      const stickerSets = await Search(searchText);
+    }, 500);
+  }, [searchText]);
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.searchBarWrapper}>
@@ -36,6 +47,8 @@ const SearchBar = () => {
             className={styles.searchBox}
             type="text"
             placeholder={t("Search for stickers")}
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
           />
           <div onClick={() => router.push("/info")} className={styles.infoBox}>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
