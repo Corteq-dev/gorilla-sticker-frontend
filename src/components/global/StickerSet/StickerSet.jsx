@@ -4,7 +4,11 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, FreeMode } from "swiper/modules";
 import Link from "next/link";
 
-export default function StickerSet({ stickerSet, className }) {
+export default function StickerSet({
+  stickerSet,
+  className,
+  onActionCallback,
+}) {
   return (
     <Row className={className}>
       <Col lg={12} className={styles.header}>
@@ -42,8 +46,18 @@ export default function StickerSet({ stickerSet, className }) {
           ADD
         </a>
         <div className={styles.emojis}>
-          <div className={styles.emoji}>❤️ 123</div>
-          <div className={styles.emoji}>⭐ 123</div>
+          <div
+            className={styles.emoji}
+            onClick={() => onActionCallback(stickerSet.id, true)}
+          >
+            ❤️ {stickerSet.likes}
+          </div>
+          <div
+            className={styles.emoji}
+            onClick={() => onActionCallback(stickerSet.id, false)}
+          >
+            ⭐ {stickerSet.favorites}
+          </div>
         </div>
       </Col>
     </Row>

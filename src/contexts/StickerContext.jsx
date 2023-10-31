@@ -34,8 +34,7 @@ export function StickerProvider({ children }) {
   }
 
   function AddStickerSets(newStickerSets) {
-    console.log(newStickerSets);
-    if (newStickerSets) setStickerSets([...stickerSets, newStickerSets]);
+    if (newStickerSets) setStickerSets([...stickerSets, ...newStickerSets]);
   }
 
   return (
