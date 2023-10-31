@@ -16,7 +16,9 @@ export default function StickerSet({
           <Link href={`/details/${stickerSet.id}`} className={styles.name}>
             {stickerSet.customName}
           </Link>
-          <p className={styles.description}>{stickerSet.description}</p>
+          {stickerSet.description && (
+            <p className={styles.description}>{stickerSet.description}</p>
+          )}
         </div>
       </Col>
       <Col lg={12} className={styles.stickers}>
@@ -50,7 +52,9 @@ export default function StickerSet({
             className={
               styles.emoji + " " + (stickerSet.liked == true && styles.liked)
             }
-            onClick={() => onActionCallback(stickerSet.id, true)}
+            onClick={() =>
+              onActionCallback(stickerSet.id, "like", !stickerSet.liked)
+            }
           >
             ❤️ {stickerSet.likes}
           </div>
@@ -60,7 +64,13 @@ export default function StickerSet({
               " " +
               (stickerSet.addedToFavorites == true && styles.liked)
             }
-            onClick={() => onActionCallback(stickerSet.id, false)}
+            onClick={() =>
+              onActionCallback(
+                stickerSet.id,
+                "fav",
+                !stickerSet.addedToFavorites,
+              )
+            }
           >
             ⭐ {stickerSet.favorites}
           </div>

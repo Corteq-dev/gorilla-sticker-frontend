@@ -37,6 +37,34 @@ export function StickerProvider({ children }) {
     if (newStickerSets) setStickerSets([...stickerSets, ...newStickerSets]);
   }
 
+  function ChangeLiked(stickerSetId, status) {
+    setStickerSets((currentStickers) => {
+      return currentStickers.map((item) => {
+        if (item.id == stickerSetId)
+          return {
+            ...item,
+            liked: status,
+            likes: status == true ? item.likes + 1 : item.likes - 1,
+          };
+        else return item;
+      });
+    });
+  }
+
+  function ChangeFavourite(stickerSetId, status) {
+    setStickerSets((currentStickers) => {
+      return currentStickers.map((item) => {
+        if (item.id == stickerSetId)
+          return {
+            ...item,
+            addedToFavorites: status,
+            favorites: status == true ? item.favorites + 1 : item.favorites - 1,
+          };
+        else return item;
+      });
+    });
+  }
+
   return (
     <StickerContext.Provider
       value={{
@@ -44,6 +72,8 @@ export function StickerProvider({ children }) {
         detailedStickerSet,
         setDetailedSticker,
         AddStickerSets,
+        ChangeLiked,
+        ChangeFavourite,
       }}
     >
       {children}

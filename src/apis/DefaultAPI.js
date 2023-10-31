@@ -49,6 +49,20 @@ export async function GetPopularStickers(
   });
 }
 
+export async function SendActionData(actions) {
+  /*await axios.post(
+    APIConfigs.GorillaSticker.url + "/sendActionData",
+    JSON.stringify({ userId: window.Telegram.WebApp.initDataUnsafe.user.id, actionDataList: actions })
+  );*/
+  await axios.post(
+    APIConfigs.GorillaSticker.url +
+      "/sendActionData?userId=" +
+      window.Telegram.WebApp.initDataUnsafe.user.id +
+      "&actionDataList=" +
+      new URLSearchParams(JSON.stringify(actions)).toString(),
+  );
+}
+
 function retry(maxRetries, fn) {
   return fn().catch(function (err) {
     if (maxRetries <= 0) {

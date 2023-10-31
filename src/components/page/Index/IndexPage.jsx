@@ -3,46 +3,58 @@ import styles from "./IndexPage.module.scss";
 import StickerSet from "../../global/StickerSet/StickerSet";
 import { Container } from "react-bootstrap";
 import { useStickers } from "../../../contexts/StickerContext";
-import { GetNewStickers } from "../../../apis/DefaultAPI";
+import { GetNewStickers, SendActionData } from "../../../apis/DefaultAPI";
 import { useObserver } from "../../../hooks/useObserver";
 
 export default function IndexPage() {
-  const { stickerSets, AddStickerSets } = useStickers();
-  const [actions, setActions] = useState({});
+  const { stickerSets, AddStickerSets, ChangeLiked, ChangeFavourite } =
+    useStickers();
+  const [actions, setActions] = useState([]);
+  const actionRef = useRef(actions);
   const [page, setPage] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [canLoad, setCanLoad] = useState(false);
 
-  function onActionCallback(stickerSetId, isLike) {
+  function onActionCallback(stickerSetId, action, status) {
+    if (action == "like") ChangeLiked(stickerSetId, status);
+    else ChangeFavourite(stickerSetId, status);
+
     setActions((currentActions) => {
-      let action = currentActions.find((r) => r.id === stickerSetId);
-      const stickerSet = stickerSets.find((r) => r.id === stickerSetId);
-
-      if (!action) action = { stickerSetId, like: false, favorite: false };
-
-      if (isLike) {
-        if (stickerSet.liked) {
-          action.like = false;
-        }
-      } else {
-      }
-
-      if (currentActions.find((r) => r.id === stickerSetId) == null) {
-        return [
-          ...currentItems,
-          { stickerSetId, like: isLike, favorite: isLike == false },
-        ];
+      if (currentActions.find((r) => r.stickerSetId == stickerSetId) == null) {
+        if (action == "like")
+          return [...currentActions, { stickerSetId, like: status }];
+        else return [...currentActions, { stickerSetId, favorite: status }];
       } else {
         return currentActions.map((r) => {
-          if (r.id === stickerSetId) {
-            if (isLike)
-              return { stickerSetId, like: isLike, favorite: r.favorite };
-            else return { stickerSetId, like: r.like, favorite: isLike };
+          if (r.stickerSetId === stickerSetId) {
+            if (action == "like")
+              return {
+                stickerSetId,
+                like: r.like == true ? null : status,
+                favorite: r.favorite,
+              };
+            else
+              return {
+                stickerSetId,
+                like: r.like,
+                favorite: r.favorite == true ? null : status,
+              };
           } else return r;
         });
       }
     });
   }
+
+  useEffect(() => {
+    return () => {
+      if (actionRef.current.length > 0) SendActionData(actionRef.current);
+    };
+  }, []);
+
+  useEffect(() => {
+    console.log(actions);
+    actionRef.current = actions;
+  }, [actions]);
 
   const lastElement = useRef();
   useObserver(lastElement, canLoad, isLoading, () => {
