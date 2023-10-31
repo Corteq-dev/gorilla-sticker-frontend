@@ -14,7 +14,7 @@ export default function StickerSet({
       <Col lg={12} className={styles.header}>
         <div className={styles.headerText}>
           <Link href={`/details/${stickerSet.id}`} className={styles.name}>
-            {stickerSet.name}
+            {stickerSet.customName}
           </Link>
           <p className={styles.description}>{stickerSet.description}</p>
         </div>
@@ -30,8 +30,8 @@ export default function StickerSet({
           }}
           modules={[Pagination, FreeMode]}
         >
-          {stickerSet.stickersUrl &&
-            stickerSet.stickersUrl.map((item, index) => (
+          {stickerSet.stickersUlr &&
+            stickerSet.stickersUlr.map((item, index) => (
               <SwiperSlide key={index} className={styles.slide}>
                 <img src={item} />
               </SwiperSlide>
@@ -47,13 +47,19 @@ export default function StickerSet({
         </a>
         <div className={styles.emojis}>
           <div
-            className={styles.emoji}
+            className={
+              styles.emoji + " " + (stickerSet.liked == true && styles.liked)
+            }
             onClick={() => onActionCallback(stickerSet.id, true)}
           >
             ❤️ {stickerSet.likes}
           </div>
           <div
-            className={styles.emoji}
+            className={
+              styles.emoji +
+              " " +
+              (stickerSet.addedToFavorites == true && styles.liked)
+            }
             onClick={() => onActionCallback(stickerSet.id, false)}
           >
             ⭐ {stickerSet.favorites}

@@ -1,24 +1,32 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import styles from "./IndexPage.module.scss";
 import StickerSet from "../../global/StickerSet/StickerSet";
 import { Container } from "react-bootstrap";
 import { useStickers } from "../../../contexts/StickerContext";
 import { GetNewStickers } from "../../../apis/DefaultAPI";
+import { useObserver } from "../../../hooks/useObserver";
 
 export default function IndexPage() {
   const { stickerSets, AddStickerSets } = useStickers();
-  const { actions, setActions } = useState({});
-
-  useEffect(() => {
-    async function fetchData() {
-      const data = await GetNewStickers();
-      AddStickerSets(data);
-    }
-    fetchData();
-  }, []);
+  const [actions, setActions] = useState({});
+  const [page, setPage] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
+  const [canLoad, setCanLoad] = useState(false);
 
   function onActionCallback(stickerSetId, isLike) {
     setActions((currentActions) => {
+      let action = currentActions.find((r) => r.id === stickerSetId);
+      const stickerSet = stickerSets.find((r) => r.id === stickerSetId);
+
+      if (!action) action = { stickerSetId, like: false, favorite: false };
+
+      if (isLike) {
+        if (stickerSet.liked) {
+          action.like = false;
+        }
+      } else {
+      }
+
       if (currentActions.find((r) => r.id === stickerSetId) == null) {
         return [
           ...currentItems,
@@ -36,6 +44,26 @@ export default function IndexPage() {
     });
   }
 
+  const lastElement = useRef();
+  useObserver(lastElement, canLoad, isLoading, () => {
+    console.log(`Observer worked: ${page}`);
+    setPage(page + 1);
+  });
+
+  useEffect(() => {
+    async function fetchData(page) {
+      setCanLoad(false);
+      setIsLoading(true);
+      const data = await GetNewStickers(page == 0 ? 0 : page * 10);
+      AddStickerSets(data);
+      setIsLoading(false);
+      setTimeout(() => setCanLoad(true), 250);
+      console.log(`Fetching worked: ${page}`);
+    }
+
+    fetchData(page);
+  }, [page]);
+
   return (
     <Container className={styles.container}>
       <div className={styles.placeholder}></div>
@@ -48,6 +76,7 @@ export default function IndexPage() {
             onActionCallback={onActionCallback}
           />
         ))}
+      <div ref={lastElement} />
     </Container>
   );
 }
