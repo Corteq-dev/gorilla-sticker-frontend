@@ -9,7 +9,8 @@ const SearchBar = () => {
   const [isNew, setIsNew] = useState(true);
   const [pageOffsetY, setPageOffsetY] = useState(0);
   const [searchText, setSearchText] = useState("");
-  let searchDelayTimer = null;
+  const [searchDelayTimer, setSearchDelayTimer] = useState(null);
+
   const router = useRouter();
   const { t } = useTranslation();
 
@@ -31,11 +32,18 @@ const SearchBar = () => {
   }, []);
 
   useEffect(() => {
-    clearTimeout(searchDelayTimer);
+    if (searchDelayTimer) {
+      clearTimeout(searchDelayTimer);
+    }
 
-    searchDelayTimer = setTimeout(async () => {
-      const stickerSets = await Search(searchText);
-    }, 500);
+    if (searchText) {
+      const newSearchDelayTimer = setTimeout(async () => {
+        // const stickerSets = await Search(searchText);
+        console.log('jfabvjbewrfv')
+      }, 1500);
+
+      setSearchDelayTimer(newSearchDelayTimer);
+    }
   }, [searchText]);
 
   return (
