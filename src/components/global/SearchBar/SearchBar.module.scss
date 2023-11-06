@@ -1,124 +1,181 @@
 .searchBox {
-  width: 100%;
-  height: inherit;
-  font-size: 14px;
-  padding: 10px 8px;
-  border: none;
-  outline: none;
-  background-color: var(--tg-theme-secondary-bg-color);
+    width: 100%;
+    height: inherit;
+    font-size: 14px;
+    padding: 10px 8px;
+    border: none;
+    outline: none;
+    background-color: var(--tg-theme-secondary-bg-color);
 }
 
 .searchImage {
-  background-image: url("../../../assets/images/searching.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  padding-right: 40px;
-  width: 0.5%;
-  height: inherit;
-  border-radius: 10px 0 0 10px;
-  margin-left: 10px;
-  background-color: var(--tg-theme-secondary-bg-color);
-  color: var(--tg-theme-secondary-bg-color);
+    background-image: url("../../../assets/images/searching.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    padding-right: 40px;
+    width: 0.5%;
+    height: inherit;
+    border-radius: 10px 0 0 10px;
+    margin-left: 10px;
+    background-color: var(--tg-theme-secondary-bg-color);
+    color: var(--tg-theme-secondary-bg-color);
 }
 
 .infoBox {
-  height: inherit;
-  background-repeat: no-repeat;
-  background-position: center;
-  width: 3.5%;
-  padding: 0 40px 0 6px;
-  margin-right: 10px;
-  border-radius: 0 10px 10px 0;
-  cursor: pointer;
-  background-color: var(--tg-theme-secondary-bg-color);
-
-  & svg {
     height: inherit;
-    width: 18px;
-    fill: var(--tg-theme-hint-color);
-  }
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 3.5%;
+    padding: 0 40px 0 6px;
+    margin-right: 10px;
+    border-radius: 0 10px 10px 0;
+    cursor: pointer;
+    background-color: var(--tg-theme-secondary-bg-color);
+
+    & svg {
+        height: inherit;
+        width: 18px;
+        fill: var(--tg-theme-hint-color);
+    }
 }
 
 .wrapper {
-  height: 66px;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  background-color: var(--tg-theme-bg-color);
-  position: fixed;
-  z-index: 1001;
+    height: 66px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background-color: var(--tg-theme-bg-color);
+    position: fixed;
+    z-index: 1001;
 }
 
 .searchBarWrapper {
-  height: 100%;
-  z-index: 2;
-  background-color: var(--tg-theme-bg-color);
-  padding: 8px 0;
-  display: flex;
-  align-items: center;
+    height: 100%;
+    z-index: 2;
+    background-color: var(--tg-theme-bg-color);
+    padding: 8px 0;
+    display: flex;
+    align-items: center;
 }
 
 .searchBar {
-  width: 100%;
-  display: flex;
-  height: 41px;
+    width: 100%;
+    display: flex;
+    height: 41px;
 }
 
 .menuBox {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-around;
-  position: fixed;
-  height: 38px;
-  margin-top: 96px;
-  background-color: var(--tg-theme-bg-color);
-  transition: 0.3s linear;
-  z-index: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    position: fixed;
+    height: 38px;
+    margin-top: 96px;
+    background-color: var(--tg-theme-bg-color);
+    transition: 0.3s linear;
+    z-index: 1;
 }
 
 .menuBoxHiden {
-  position: fixed;
-  margin-top: 20px;
-  width: 100%;
-  display: flex;
-  top: -40px;
-  transition: 0.5s linear;
+    position: fixed;
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    top: -40px;
+    transition: 0.5s linear;
 }
 
 .menuItemBox {
-  width: 50%;
-  justify-content: center;
-  text-align: center;
-  height: 36px;
-  color: #99999a;
-  cursor: pointer;
+    position: relative;
+    // padding: 8px 0;
+    width: 50%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 36px;
+    color: #99999a;
+    cursor: pointer;
+    p{
+      margin: 0;
+    }
+}
+.sortTypes {
+    position: absolute;
+    width: 200%;
+    transform: translateY(100%) translateX(-50%);
+    left: 0;
+    bottom: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: space-around;
+    padding: 16px 0;
+    background-color: var(--tg-theme-bg-color);
+}
+.toggleSortOpen {
+    position: absolute;
+    right: 16px;
+    top: 0;
+    color: #2481cc;
+    background: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    outline: none;
+    width: 30px;
+    height: 30px;
+    span {
+        width: 20px;
+        height: 20px;
+        pointer-events: none;
+        transition: 250ms;
+        &.rotate {
+            rotate: 180deg;
+        }
+    }
+}
+.itemSortBar {
+    padding: 2px 8px;
+    border: 1px solid #99999a;
+    border-radius: 24px;
+    outline: none;
+    background: none;
+    color: #99999a;
+    transition: 250ms;
+    &.activeSort {
+      border: 1px solid #2481cc;
+        background-color: #2481cc;
+        color: white;
+    }
 }
 
 .active {
-  color: #2481cc;
+    color: #2481cc;
 }
 
 .scrollBar {
-  position: absolute;
-  width: 50%;
-  border: 2px solid #2481cc;
-  border-radius: 10px;
-  top: 35px;
-  height: 1px;
-  left: 0;
-  z-index: 1001;
-  transition: 0.5s;
+    position: absolute;
+    width: 50%;
+    border: 2px solid #2481cc;
+    border-radius: 10px;
+    top: 35px;
+    height: 1px;
+    left: 0;
+    z-index: 1001;
+    transition: 0.5s;
 }
 
 .moveLeft {
-  left: 50%;
-  transition: left 0.5s ease;
+    left: 50%;
+    transition: left 0.5s ease;
 }
 
 .moveRight {
-  left: 0;
-  transition: left 0.5s ease;
+    left: 0;
+    transition: left 0.5s ease;
 }

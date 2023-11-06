@@ -68,6 +68,7 @@ export function StickerProvider({ children }) {
   return (
     <StickerContext.Provider
       value={{
+        setStickerSets,
         stickerSets,
         detailedStickerSet,
         setDetailedSticker,
