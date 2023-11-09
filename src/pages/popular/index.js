@@ -4,10 +4,10 @@ import SearchBar from "/src/components/global/SearchBar/SearchBar";
 import { useEffect } from "react";
 
 export default function Home() {
-    return (
-        <StickerProvider>
-            <SearchBar />
-            <IndexPage />
-        </StickerProvider>
-    );
+  return (
+    <StickerProvider>
+      <SearchBar />
+      <IndexPage />
+    </StickerProvider>
+  );
 }

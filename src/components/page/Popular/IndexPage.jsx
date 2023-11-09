@@ -65,7 +65,6 @@ export default function IndexPage() {
     fetchData(page);
   }, [page]);
 
-
   return (
     <Container className={styles.container}>
       <div className={styles.placeholder}></div>

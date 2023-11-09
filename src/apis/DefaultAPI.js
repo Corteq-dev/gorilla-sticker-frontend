@@ -24,6 +24,7 @@ export async function GetNewStickers(offset = 0, limit = 10) {
         "&limit=" +
         limit,
     );
+    console.log("GET NEW STICKERS", offset, limit, res.data);
     return res.data;
   });
 }
@@ -76,6 +77,7 @@ export async function Search(text, offset = 0, limit = 10) {
         "&text=" +
         text,
     );
+    console.log("GetSearchStickers", text, res.data);
     return res.data;
   });
 }

@@ -90,6 +90,7 @@
 
 .menuItemBox {
     position: relative;
+
     // padding: 8px 0;
     width: 50%;
     justify-content: center;
@@ -98,10 +99,12 @@
     height: 36px;
     color: #99999a;
     cursor: pointer;
+
     p{
       margin: 0;
     }
 }
+
 .sortTypes {
     position: absolute;
     width: 200%;
@@ -115,12 +118,12 @@
     padding: 16px 0;
     background-color: var(--tg-theme-bg-color);
 }
+
 .toggleSortOpen {
     position: absolute;
     right: 16px;
     top: 0;
     color: #2481cc;
-    background: none;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -129,16 +132,19 @@
     outline: none;
     width: 30px;
     height: 30px;
+
     span {
         width: 20px;
         height: 20px;
         pointer-events: none;
         transition: 250ms;
+
         &.rotate {
             rotate: 180deg;
         }
     }
 }
+
 .itemSortBar {
     padding: 2px 8px;
     border: 1px solid #99999a;
@@ -147,6 +153,7 @@
     background: none;
     color: #99999a;
     transition: 250ms;
+
     &.activeSort {
       border: 1px solid #2481cc;
         background-color: #2481cc;
