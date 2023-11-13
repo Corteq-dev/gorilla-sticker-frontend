@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./InfoPage.module.scss";
-import { router } from "next/client";
 import { useTranslation } from "react-i18next";
 
 const InfoPage = () => {
