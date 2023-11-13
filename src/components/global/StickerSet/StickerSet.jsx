@@ -10,7 +10,7 @@ export default function StickerSet({
   onActionCallback,
 }) {
   return (
-    <Row className={className}>
+    <Row className={styles.wrapper}>
       <Col lg={12} className={styles.header}>
         <div className={styles.headerText}>
           <Link href={`/details/${stickerSet.id}`} className={styles.name}>
@@ -42,7 +42,7 @@ export default function StickerSet({
       </Col>
       <Col lg={6} className={styles.footer}>
         <a
-          href={`https://t.me/addstickers/Yellowboi`}
+          href={`https://t.me/addstickers/${stickerSet.name}`}
           className={styles.button}
         >
           ADD
