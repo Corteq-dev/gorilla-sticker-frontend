@@ -50,25 +50,11 @@ export async function GetPopularStickers(
   });
 }
 
-export async function GetStickerDetails(stickerSetId) {
-  return retry(10, async () => {
-    const res = await axios.get(
-      APIConfigs.GorillaSticker.url +
-        "/stickers/new?userId=" +
-        window.Telegram.WebApp.initDataUnsafe.user.id +
-        "&offset=" +
-        offset +
-        "&limit=" +
-        limit,
-    );
-    return res.data;
-  });
-}
 export async function Search(text, offset = 0, limit = 10) {
   return retry(10, async () => {
     const res = await axios.get(
       APIConfigs.GorillaSticker.url +
-        "/stickers/new?userId=" +
+        "/search?userId=" +
         window.Telegram.WebApp.initDataUnsafe.user.id +
         "&offset=" +
         offset +

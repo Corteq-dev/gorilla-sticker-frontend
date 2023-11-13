@@ -8,6 +8,10 @@ export function useStickers() {
 
 export function StickerProvider({ children }) {
   const [stickerSets, setStickerSets] = useState([]);
+  const [searchText, setSearchText] = useState("");
+  const [canLoad, setCanLoad] = useState(false);
+  const [page, setPage] = useState(-1);
+  const [dateFilter, setDateFilter] = useState(0);
 
   const [detailedStickerSet, setDetailedStickerSet] = useState({});
 
@@ -34,7 +38,11 @@ export function StickerProvider({ children }) {
   }
 
   function AddStickerSets(newStickerSets) {
-    if (newStickerSets) setStickerSets([...stickerSets, ...newStickerSets]);
+    if (newStickerSets)
+      setStickerSets((currentStickers) => [
+        ...currentStickers,
+        ...newStickerSets,
+      ]);
   }
 
   function ChangeLiked(stickerSetId, status) {
@@ -68,13 +76,21 @@ export function StickerProvider({ children }) {
   return (
     <StickerContext.Provider
       value={{
+        canLoad,
+        setCanLoad,
         setStickerSets,
         stickerSets,
         detailedStickerSet,
+        searchText,
+        setSearchText,
         setDetailedSticker,
         AddStickerSets,
         ChangeLiked,
         ChangeFavourite,
+        page,
+        setPage,
+        dateFilter,
+        setDateFilter,
       }}
     >
       {children}

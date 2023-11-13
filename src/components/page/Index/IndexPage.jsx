@@ -3,17 +3,28 @@ import styles from "./IndexPage.module.scss";
 import StickerSet from "../../global/StickerSet/StickerSet";
 import { Container } from "react-bootstrap";
 import { useStickers } from "../../../contexts/StickerContext";
-import { GetNewStickers, SendActionData } from "../../../apis/DefaultAPI";
+import {
+  GetNewStickers,
+  SendActionData,
+  Search,
+} from "../../../apis/DefaultAPI";
 import { useObserver } from "../../../hooks/useObserver";
 
 export default function IndexPage() {
-  const { stickerSets, AddStickerSets, ChangeLiked, ChangeFavourite } =
-    useStickers();
+  const {
+    stickerSets,
+    AddStickerSets,
+    ChangeLiked,
+    ChangeFavourite,
+    searchText,
+    canLoad,
+    setCanLoad,
+    page,
+    setPage,
+  } = useStickers();
   const [actions, setActions] = useState([]);
   const actionRef = useRef(actions);
-  const [page, setPage] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
-  const [canLoad, setCanLoad] = useState(false);
 
   function onActionCallback(stickerSetId, action, status) {
     if (action == "like") ChangeLiked(stickerSetId, status);
@@ -52,29 +63,37 @@ export default function IndexPage() {
   }, []);
 
   useEffect(() => {
-    console.log(actions);
     actionRef.current = actions;
   }, [actions]);
 
   const lastElement = useRef();
   useObserver(lastElement, canLoad, isLoading, () => {
-    console.log(`Observer worked: ${page}`);
     setPage(page + 1);
   });
 
   useEffect(() => {
     async function fetchData(page) {
+      if (!canLoad) return;
+
       setCanLoad(false);
       setIsLoading(true);
-      const data = await GetNewStickers(page == 0 ? 0 : page * 10);
+
+      let data = "";
+      if (searchText && searchText != "")
+        data = await Search(searchText, page * 10);
+      else data = await GetNewStickers(page * 10);
+
       AddStickerSets(data);
       setIsLoading(false);
-      setTimeout(() => setCanLoad(true), 250);
-      console.log(`Fetching worked: ${page}`);
+      if (data.length == 10) setTimeout(() => setCanLoad(true), 250);
     }
 
     fetchData(page);
   }, [page]);
+
+  useEffect(() => {
+    setCanLoad(true);
+  }, []);
 
   return (
     <Container className={styles.container}>
