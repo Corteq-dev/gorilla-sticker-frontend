@@ -7,94 +7,11 @@ export function useStickers() {
 }
 
 export function StickerProvider({ children }) {
-  const testUrl =
-    "https://api.fstik.app/file/AAMCAgADFQABZR-TIHulKyOZ9gu3ff3wCLeMItEAAkkgAAKzLDBLQOlnZOiVRNEBAAdtAAMwBA/sticker.webp";
-  const [stickerSets, setStickerSets] = useState([
-    {
-      name: "test 1",
-      id: 0,
-      stickersUrl: [testUrl, testUrl, testUrl],
-      description: "#феликс#стрэйкидс#felix#цвфеликс",
-    },
-    {
-      name: "test 2",
-      id: 1,
-      description:
-        "Лето и сезон отпусков потихоньку подходит к концу, и Хопперспешит наверстать упущенное. Заскакивайте и вы в последний вагон, чтобы провести остатки",
-      stickersUrl: [
-        testUrl,
-        testUrl,
-        testUrl,
-        testUrl,
-        testUrl,
-        testUrl,
-        testUrl,
-        testUrl,
-        testUrl,
-        testUrl,
-      ],
-    },
-    {
-      name: "test 3",
-      id: 2,
-      stickersUrl: [testUrl, testUrl, testUrl, testUrl, testUrl],
-      description: "Мишка купидон • Cupid Bear #cupid #love#cute#bear#animated",
-    },
-    {
-      name: "test 2",
-      id: 3,
-      description:
-        "Лето и сезон отпусков потихоньку подходит к концу, и Хопперспешит наверстать упущенное. Заскакивайте и вы в последний вагон, чтобы провести остатки",
-      stickersUrl: [
-        testUrl,
-        testUrl,
-        testUrl,
-        testUrl,
-        testUrl,
-        testUrl,
-        testUrl,
-        testUrl,
-        testUrl,
-        testUrl,
-      ],
-    },
-    {
-      name: "test 2",
-      id: 4,
-      description:
-        "Лето и сезон отпусков потихоньку подходит к концу, и Хопперспешит наверстать упущенное. Заскакивайте и вы в последний вагон, чтобы провести остатки",
-      stickersUrl: [
-        testUrl,
-        testUrl,
-        testUrl,
-        testUrl,
-        testUrl,
-        testUrl,
-        testUrl,
-        testUrl,
-        testUrl,
-        testUrl,
-      ],
-    },
-    {
-      name: "test 2",
-      id: 5,
-      description:
-        "Лето и сезон отпусков потихоньку подходит к концу, и Хопперспешит наверстать упущенное. Заскакивайте и вы в последний вагон, чтобы провести остатки",
-      stickersUrl: [
-        testUrl,
-        testUrl,
-        testUrl,
-        testUrl,
-        testUrl,
-        testUrl,
-        testUrl,
-        testUrl,
-        testUrl,
-        testUrl,
-      ],
-    },
-  ]);
+  const [stickerSets, setStickerSets] = useState([]);
+  const [searchText, setSearchText] = useState("");
+  const [canLoad, setCanLoad] = useState(false);
+  const [page, setPage] = useState(-1);
+  const [dateFilter, setDateFilter] = useState(0);
 
   const [detailedStickerSet, setDetailedStickerSet] = useState({});
 
@@ -120,12 +37,60 @@ export function StickerProvider({ children }) {
     });
   }
 
+  function AddStickerSets(newStickerSets) {
+    if (newStickerSets)
+      setStickerSets((currentStickers) => [
+        ...currentStickers,
+        ...newStickerSets,
+      ]);
+  }
+
+  function ChangeLiked(stickerSetId, status) {
+    setStickerSets((currentStickers) => {
+      return currentStickers.map((item) => {
+        if (item.id == stickerSetId)
+          return {
+            ...item,
+            liked: status,
+            likes: status == true ? item.likes + 1 : item.likes - 1,
+          };
+        else return item;
+      });
+    });
+  }
+
+  function ChangeFavourite(stickerSetId, status) {
+    setStickerSets((currentStickers) => {
+      return currentStickers.map((item) => {
+        if (item.id == stickerSetId)
+          return {
+            ...item,
+            addedToFavorites: status,
+            favorites: status == true ? item.favorites + 1 : item.favorites - 1,
+          };
+        else return item;
+      });
+    });
+  }
+
   return (
     <StickerContext.Provider
       value={{
+        canLoad,
+        setCanLoad,
+        setStickerSets,
         stickerSets,
         detailedStickerSet,
+        searchText,
+        setSearchText,
         setDetailedSticker,
+        AddStickerSets,
+        ChangeLiked,
+        ChangeFavourite,
+        page,
+        setPage,
+        dateFilter,
+        setDateFilter,
       }}
     >
       {children}

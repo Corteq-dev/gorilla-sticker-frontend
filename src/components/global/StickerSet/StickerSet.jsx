@@ -4,15 +4,21 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, FreeMode } from "swiper/modules";
 import Link from "next/link";
 
-export default function StickerSet({ stickerSet, className }) {
+export default function StickerSet({
+  stickerSet,
+  className,
+  onActionCallback,
+}) {
   return (
     <Row className={className}>
       <Col lg={12} className={styles.header}>
         <div className={styles.headerText}>
           <Link href={`/details/${stickerSet.id}`} className={styles.name}>
-            {stickerSet.name}
+            {stickerSet.customName}
           </Link>
-          <p className={styles.description}>{stickerSet.description}</p>
+          {stickerSet.description && (
+            <p className={styles.description}>{stickerSet.description}</p>
+          )}
         </div>
       </Col>
       <Col lg={12} className={styles.stickers}>
@@ -26,8 +32,8 @@ export default function StickerSet({ stickerSet, className }) {
           }}
           modules={[Pagination, FreeMode]}
         >
-          {stickerSet.stickersUrl &&
-            stickerSet.stickersUrl.map((item, index) => (
+          {stickerSet.stickersUlr &&
+            stickerSet.stickersUlr.map((item, index) => (
               <SwiperSlide key={index} className={styles.slide}>
                 <img src={item} />
               </SwiperSlide>
@@ -42,8 +48,32 @@ export default function StickerSet({ stickerSet, className }) {
           ADD
         </a>
         <div className={styles.emojis}>
-          <div className={styles.emoji}>❤️ 123</div>
-          <div className={styles.emoji}>⭐ 123</div>
+          <div
+            className={
+              styles.emoji + " " + (stickerSet.liked == true && styles.liked)
+            }
+            onClick={() =>
+              onActionCallback(stickerSet.id, "like", !stickerSet.liked)
+            }
+          >
+            ❤️ {stickerSet.likes}
+          </div>
+          <div
+            className={
+              styles.emoji +
+              " " +
+              (stickerSet.addedToFavorites == true && styles.liked)
+            }
+            onClick={() =>
+              onActionCallback(
+                stickerSet.id,
+                "fav",
+                !stickerSet.addedToFavorites,
+              )
+            }
+          >
+            ⭐ {stickerSet.favorites}
+          </div>
         </div>
       </Col>
     </Row>

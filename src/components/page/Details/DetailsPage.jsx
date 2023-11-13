@@ -4,7 +4,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import { useStickers } from "../../../contexts/StickerContext";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import StickerSet from "../Index/StickerSet/StickerSet";
+import StickerSet from "../../global/StickerSet/StickerSet";
 
 export default function DetailsPage() {
   const router = useRouter();

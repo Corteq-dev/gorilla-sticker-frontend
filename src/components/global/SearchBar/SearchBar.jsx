@@ -1,13 +1,53 @@
 import React, { useState, useEffect } from "react";
 import styles from "./SearchBar.module.scss";
 import { useRouter } from "next/navigation";
+import { useTranslation } from "react-i18next";
+import { Search } from "../../../apis/DefaultAPI";
+import { useStickers } from "../../../contexts/StickerContext";
+import { BsFilter } from "react-icons/bs";
 
 const SearchBar = () => {
   const [show, setShow] = useState(true);
   const [isNew, setIsNew] = useState(true);
   const [pageOffsetY, setPageOffsetY] = useState(0);
+  const [searchDelayTimer, setSearchDelayTimer] = useState(null);
+  const [sortType, setSortType] = useState(0);
+  const [isSortOpen, setIsSortOpen] = useState(false);
+  const {
+    setSearchText,
+    searchText,
+    setStickerSets,
+    setCanLoad,
+    setPage,
+    setDateFilter,
+  } = useStickers();
+
+  const sortTypeButton = [
+    {
+      id: 0,
+      value: 0,
+      text: "All time",
+    },
+    {
+      id: 1,
+      value: 3,
+      text: "3 Days",
+    },
+    {
+      id: 3,
+      value: 7,
+      text: "Week",
+    },
+    {
+      id: 4,
+      value: 30,
+      text: "Month",
+    },
+  ];
+
   const router = useRouter();
-  const [style, setStyle] = useState({});
+  const { t } = useTranslation();
+
   const controlNavbar = () => {
     setShow(window.scrollY < pageOffsetY);
     setPageOffsetY(window.scrollY);
@@ -25,6 +65,29 @@ const SearchBar = () => {
     setIsNew(window.location.pathname === "/");
   }, []);
 
+  useEffect(() => {
+    if (searchDelayTimer) {
+      clearTimeout(searchDelayTimer);
+    }
+
+    if (searchText) {
+      const newSearchDelayTimer = setTimeout(async () => {
+        setCanLoad(false);
+        const newStickerSets = await Search(searchText);
+        setStickerSets(newStickerSets);
+
+        setPage(0);
+        if (newStickerSets.length == 10)
+          setTimeout(() => setCanLoad(true), 500);
+      }, 500);
+
+      setSearchDelayTimer(newSearchDelayTimer);
+    } else {
+      setTimeout(() => setCanLoad(true), 500);
+      setPage(-1);
+    }
+  }, [searchText]);
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.searchBarWrapper}>
@@ -33,7 +96,9 @@ const SearchBar = () => {
           <input
             className={styles.searchBox}
             type="text"
-            placeholder="Search for stickers"
+            placeholder={t("Search for stickers")}
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
           />
           <div onClick={() => router.push("/info")} className={styles.infoBox}>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -53,7 +118,7 @@ const SearchBar = () => {
             styles.menuItemBox + " " + (isNew == true ? styles.active : "")
           }
         >
-          New
+          {t("New")}
         </div>
         <div
           onClick={() => router.push("/popular")}
@@ -61,7 +126,35 @@ const SearchBar = () => {
             styles.menuItemBox + " " + (isNew == false ? styles.active : "")
           }
         >
-          Popular
+          {t("Popular")}
+          {!isNew && (
+            <div className={styles.sortBar}>
+              <button
+                className={styles.toggleSortOpen}
+                onClick={() => setIsSortOpen(!isSortOpen)}
+              >
+                <BsFilter />
+              </button>
+              {isSortOpen && (
+                <div className={styles.sortTypes}>
+                  {sortTypeButton.map((button) => (
+                    <button
+                      className={`${styles.itemSortBar} ${
+                        button.id === sortType ? styles.activeSort : ""
+                      }`}
+                      key={button.id}
+                      onClick={() => {
+                        setSortType(button.id);
+                        setDateFilter(button.value);
+                      }}
+                    >
+                      {button.text}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
         </div>
         <span
           className={

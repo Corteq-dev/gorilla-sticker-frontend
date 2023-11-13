@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./InfoPage.module.scss";
+import { useTranslation } from "react-i18next";
 
 const InfoPage = () => {
   const router = useRouter();
+  const { t } = useTranslation();
   return (
     <div className={styles.wrapper}>
       <div className={styles.navigation}>
@@ -29,26 +31,26 @@ const InfoPage = () => {
         </div>
       </div>
       <p className={styles.aboutBox}>
-        <b>ABOUT</b>
+        <b>{t("ABOUT")}</b>
       </p>
       <div className={styles.nameLinkBox}>
-        <p className={styles.linkName}>Telegram bot: </p>
+        <p className={styles.linkName}>{t("botName")}: </p>
         <a href={"#"}>botName</a>
       </div>
       <div className={styles.nameLinkBox}>
-        <p className={styles.linkName}>Support chat: </p>
+        <p className={styles.linkName}>{t("SupportChat")}: </p>
         <a href={"#"}>SupportChat</a>
       </div>
       <div className={styles.nameLinkBox}>
-        <p className={styles.linkName}>Mail: </p>
+        <p className={styles.linkName}>{t("Mail")}: </p>
         <a href={"#"}>Mail</a>
       </div>
       <div className={styles.nameLinkBox}>
-        <p className={styles.linkName}>Site: </p>
+        <p className={styles.linkName}>{t("Site")}: </p>
         <a href={"#"}>Site</a>
       </div>
       <div className={styles.nameLinkBox}>
-        <p className={styles.linkName}>Terms: </p>
+        <p className={styles.linkName}>{t("Terms")}: </p>
         <a href={"#"}> Terms</a>
       </div>
       <div className={styles.nameLinkBox}>

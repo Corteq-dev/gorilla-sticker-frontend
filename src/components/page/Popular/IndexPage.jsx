@@ -7,12 +7,14 @@ import {
   GetNewStickers,
   SendActionData,
   Search,
+  GetPopularStickers,
 } from "../../../apis/DefaultAPI";
 import { useObserver } from "../../../hooks/useObserver";
 
 export default function IndexPage() {
   const {
     stickerSets,
+    setStickerSets,
     AddStickerSets,
     ChangeLiked,
     ChangeFavourite,
@@ -21,6 +23,7 @@ export default function IndexPage() {
     setCanLoad,
     page,
     setPage,
+    dateFilter,
   } = useStickers();
   const [actions, setActions] = useState([]);
   const actionRef = useRef(actions);
@@ -81,9 +84,10 @@ export default function IndexPage() {
       let data = "";
       if (searchText && searchText != "")
         data = await Search(searchText, page * 10);
-      else data = await GetNewStickers(page * 10);
+      else data = await GetPopularStickers(page * 10, 10, dateFilter);
 
-      AddStickerSets(data);
+      if (page == 0) setStickerSets(data);
+      else AddStickerSets(data);
       setIsLoading(false);
       if (data.length == 10) setTimeout(() => setCanLoad(true), 250);
     }
@@ -94,6 +98,11 @@ export default function IndexPage() {
   useEffect(() => {
     setCanLoad(true);
   }, []);
+
+  useEffect(() => {
+    setCanLoad(true);
+    setPage(0);
+  }, [dateFilter]);
 
   return (
     <Container className={styles.container}>
