@@ -32,6 +32,8 @@ export default function App({ Component, pageProps }) {
         if (!locale) locale = await GetLocale();
 
         i18n.changeLanguage(locale);
+        window.Telegram.WebApp.ready();
+        window.Telegram.WebApp.expand();
       },
       false,
     );

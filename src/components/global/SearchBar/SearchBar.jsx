@@ -13,7 +13,14 @@ const SearchBar = () => {
   const [searchDelayTimer, setSearchDelayTimer] = useState(null);
   const [sortType, setSortType] = useState(0);
   const [isSortOpen, setIsSortOpen] = useState(false);
-  const { setSearchText, searchText, setStickerSets, setCanLoad, setPage, setDateFilter } = useStickers();
+  const {
+    setSearchText,
+    searchText,
+    setStickerSets,
+    setCanLoad,
+    setPage,
+    setDateFilter,
+  } = useStickers();
 
   const sortTypeButton = [
     {
@@ -70,7 +77,8 @@ const SearchBar = () => {
         setStickerSets(newStickerSets);
 
         setPage(0);
-        if (newStickerSets.length == 10) setTimeout(() => setCanLoad(true), 500);
+        if (newStickerSets.length == 10)
+          setTimeout(() => setCanLoad(true), 500);
       }, 500);
 
       setSearchDelayTimer(newSearchDelayTimer);
@@ -99,28 +107,41 @@ const SearchBar = () => {
           </div>
         </div>
       </div>
-      <div className={`${styles.menuBox} ${show == false ? `${styles.menuBoxHiden}` : ""}`}>
+      <div
+        className={`${styles.menuBox} ${
+          show == false ? `${styles.menuBoxHiden}` : ""
+        }`}
+      >
         <div
           onClick={() => router.push("/")}
-          className={styles.menuItemBox + " " + (isNew == true ? styles.active : "")}
+          className={
+            styles.menuItemBox + " " + (isNew == true ? styles.active : "")
+          }
         >
           {t("New")}
         </div>
         <div
           onClick={() => router.push("/popular")}
-          className={styles.menuItemBox + " " + (isNew == false ? styles.active : "")}
+          className={
+            styles.menuItemBox + " " + (isNew == false ? styles.active : "")
+          }
         >
           {t("Popular")}
           {!isNew && (
             <div className={styles.sortBar}>
-              <button className={styles.toggleSortOpen} onClick={() => setIsSortOpen(!isSortOpen)}>
+              <button
+                className={styles.toggleSortOpen}
+                onClick={() => setIsSortOpen(!isSortOpen)}
+              >
                 <BsFilter />
               </button>
               {isSortOpen && (
                 <div className={styles.sortTypes}>
                   {sortTypeButton.map((button) => (
                     <button
-                      className={`${styles.itemSortBar} ${button.id === sortType ? styles.activeSort : ""}`}
+                      className={`${styles.itemSortBar} ${
+                        button.id === sortType ? styles.activeSort : ""
+                      }`}
                       key={button.id}
                       onClick={() => {
                         setSortType(button.id);
@@ -135,7 +156,13 @@ const SearchBar = () => {
             </div>
           )}
         </div>
-        <span className={styles.scrollBar + " " + (isNew == false ? styles.moveLeft : styles.moveRight)}></span>
+        <span
+          className={
+            styles.scrollBar +
+            " " +
+            (isNew == false ? styles.moveLeft : styles.moveRight)
+          }
+        ></span>
       </div>
     </div>
   );

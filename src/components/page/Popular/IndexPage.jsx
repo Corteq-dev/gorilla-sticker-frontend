@@ -3,7 +3,12 @@ import styles from "./IndexPage.module.scss";
 import StickerSet from "../../global/StickerSet/StickerSet";
 import { Container } from "react-bootstrap";
 import { useStickers } from "../../../contexts/StickerContext";
-import { GetNewStickers, SendActionData, Search, GetPopularStickers } from "../../../apis/DefaultAPI";
+import {
+  GetNewStickers,
+  SendActionData,
+  Search,
+  GetPopularStickers,
+} from "../../../apis/DefaultAPI";
 import { useObserver } from "../../../hooks/useObserver";
 
 export default function IndexPage() {
@@ -30,7 +35,8 @@ export default function IndexPage() {
 
     setActions((currentActions) => {
       if (currentActions.find((r) => r.stickerSetId == stickerSetId) == null) {
-        if (action == "like") return [...currentActions, { stickerSetId, like: status }];
+        if (action == "like")
+          return [...currentActions, { stickerSetId, like: status }];
         else return [...currentActions, { stickerSetId, favorite: status }];
       } else {
         return currentActions.map((r) => {
@@ -76,7 +82,8 @@ export default function IndexPage() {
       setIsLoading(true);
 
       let data = "";
-      if (searchText && searchText != "") data = await Search(searchText, page * 10);
+      if (searchText && searchText != "")
+        data = await Search(searchText, page * 10);
       else data = await GetPopularStickers(page * 10, 10, dateFilter);
 
       if (page == 0) setStickerSets(data);
