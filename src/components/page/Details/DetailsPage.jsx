@@ -215,7 +215,7 @@ export default function DetailsPage() {
               <>
                 {item.slice(item.length - 4) == ".tgs" ? (
                   <tgs-player
-                    id="firstLottie"
+                    id={`${detailedStickerSet}-${index}`}
                     autoplay
                     loop
                     mode="normal"
@@ -223,7 +223,7 @@ export default function DetailsPage() {
                     style={{ width: 90, height: 90 }}
                   ></tgs-player>
                 ) : item.slice(item.length - 5) == ".webm" ? (
-                  <video width="90" height="90" autoPlay loop>
+                  <video width="90" height="90" playsinline autoPlay loop muted>
                     <source src={item} type="video/webm" />
                   </video>
                 ) : (

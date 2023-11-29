@@ -38,7 +38,7 @@ export default function StickerSet({
               <SwiperSlide key={index} className={styles.slide}>
                 {item.slice(item.length - 4) == ".tgs" ? (
                   <tgs-player
-                    id="firstLottie"
+                    id={`tgs-player-${stickerSet.id}-${index}`}
                     autoplay
                     loop
                     mode="normal"
@@ -46,7 +46,15 @@ export default function StickerSet({
                     style={{ width: 90, height: 90 }}
                   ></tgs-player>
                 ) : item.slice(item.length - 5) == ".webm" ? (
-                  <video width="90" height="90" autoPlay loop>
+                  <video
+                    width="90"
+                    height="90"
+                    playsinline
+                    autoPlay
+                    loop
+                    muted
+                    id={`video-${stickerSet.id}-${index}`}
+                  >
                     <source src={item} type="video/webm" />
                   </video>
                 ) : (
