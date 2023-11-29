@@ -29,38 +29,64 @@ export default function IndexPage() {
   const [isLoading, setIsLoading] = useState(false);
 
   function onActionCallback(stickerSetId, action, status) {
-    if (action == "like") ChangeLiked(stickerSetId, status);
-    else ChangeFavourite(stickerSetId, status);
+    const stickerSet = stickerSets.find((item) => item.id === stickerSetId);
 
     setActions((currentActions) => {
       if (currentActions.find((r) => r.stickerSetId == stickerSetId) == null) {
         if (action == "like")
-          return [...currentActions, { stickerSetId, like: status }];
-        else return [...currentActions, { stickerSetId, favorite: status }];
+          return [
+            ...currentActions,
+            {
+              stickerSetId,
+              like: !stickerSet.liked,
+              initialLike: stickerSet.liked,
+              initialFav: stickerSet.addedToFavorites,
+            },
+          ];
+        else
+          return [
+            ...currentActions,
+            {
+              stickerSetId,
+              favorite: !stickerSet.addedToFavorites,
+              initialLike: stickerSet.liked,
+              initialFav: stickerSet.addedToFavorites,
+            },
+          ];
       } else {
         return currentActions.map((r) => {
           if (r.stickerSetId === stickerSetId) {
             if (action == "like")
               return {
-                stickerSetId,
-                like: r.like == true ? null : status,
-                favorite: r.favorite,
+                ...r,
+                like: r.like == undefined ? !r.initialLike : !r.like,
               };
             else
               return {
-                stickerSetId,
-                like: r.like,
-                favorite: r.favorite == true ? null : status,
+                ...r,
+                favorite: r.favorite == undefined ? !r.initialFav : !r.favorite,
               };
           } else return r;
         });
       }
     });
+
+    if (action == "like") ChangeLiked(stickerSetId, status);
+    else ChangeFavourite(stickerSetId, status);
   }
 
   useEffect(() => {
     return () => {
-      if (actionRef.current.length > 0) SendActionData(actionRef.current);
+      if (actionRef.current.length > 0) {
+        const data = actionRef.current.map((item) => {
+          return {
+            stickerSetId: item.stickerSetId,
+            like: item.like === item.initialLike ? null : item.like,
+            favorite: item.favorite === item.initialFav ? null : item.favorite,
+          };
+        });
+        SendActionData(data);
+      }
     };
   }, []);
 
