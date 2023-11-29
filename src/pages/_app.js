@@ -40,6 +40,12 @@ export default function App({ Component, pageProps }) {
 
     document.body.appendChild(script);
 
+    const tgsPlayerScript = document.createElement("script");
+    tgsPlayerScript.src =
+      "https://unpkg.com/@lottiefiles/lottie-player@latest/dist/tgs-player.js";
+    tgsPlayerScript.async = true;
+    document.body.appendChild(tgsPlayerScript);
+
     return () => {
       document.body.removeChild(script);
     };

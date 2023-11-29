@@ -36,7 +36,22 @@ export default function StickerSet({
           {stickerSet.stickersUlr &&
             stickerSet.stickersUlr.map((item, index) => (
               <SwiperSlide key={index} className={styles.slide}>
-                <img src={item} />
+                {item.slice(item.length - 4) == ".tgs" ? (
+                  <tgs-player
+                    id="firstLottie"
+                    autoplay
+                    loop
+                    mode="normal"
+                    src={item}
+                    style={{ width: 90, height: 90 }}
+                  ></tgs-player>
+                ) : item.slice(item.length - 5) == ".webm" ? (
+                  <video width="90" height="90" autoPlay loop>
+                    <source src={item} type="video/webm" />
+                  </video>
+                ) : (
+                  <img src={item} />
+                )}
               </SwiperSlide>
             ))}
         </Swiper>
