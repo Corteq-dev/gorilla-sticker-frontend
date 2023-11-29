@@ -115,10 +115,6 @@ export default function IndexPage() {
     }
   }, [dateFilter]);
 
-  useEffect(() => {
-    console.log(`Can load: ${canLoad}, page: ${page}, isLoading: ${isLoading}`);
-  }, [canLoad]);
-
   return (
     <Container className={styles.container}>
       <div className={styles.placeholder}></div>
