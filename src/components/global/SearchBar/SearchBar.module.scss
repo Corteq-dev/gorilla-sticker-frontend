@@ -48,8 +48,14 @@
   justify-content: center;
   flex-direction: column;
   background-color: var(--tg-theme-bg-color);
-  position: fixed;
   z-index: 1001;
+  position: fixed;
+  top: 0;
+  transition: 0.5s linear;
+}
+
+.hidden {
+  top: -110px;
 }
 
 .searchBarWrapper {
@@ -81,19 +87,8 @@
   z-index: 1;
 }
 
-.menuBoxHiden {
-  position: fixed;
-  margin-top: 20px;
-  width: 100%;
-  display: flex;
-  top: -40px;
-  transition: 0.5s linear;
-}
-
 .menuItemBox {
   position: relative;
-
-  // padding: 8px 0;
   width: 50%;
   justify-content: center;
   align-items: center;

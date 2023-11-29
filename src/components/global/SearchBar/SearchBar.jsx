@@ -51,7 +51,7 @@ const SearchBar = () => {
 
   const controlNavbar = () => {
     setShow(window.scrollY < pageOffsetY);
-    setPageOffsetY(window.scrollY);
+    setPageOffsetY(window.scrollY > 0 ? window.scrollY : 0);
   };
 
   useEffect(() => {
@@ -100,7 +100,9 @@ const SearchBar = () => {
   }, [searchText]);
 
   return (
-    <div className={styles.wrapper}>
+    <div
+      className={styles.wrapper + " " + (show == false ? styles.hidden : "")}
+    >
       <div className={styles.searchBarWrapper}>
         <div className={styles.searchBar}>
           <div className={styles.searchImage}></div>
@@ -134,11 +136,7 @@ const SearchBar = () => {
           )}
         </div>
       </div>
-      <div
-        className={`${styles.menuBox} ${
-          show == false ? `${styles.menuBoxHiden}` : ""
-        }`}
-      >
+      <div className={styles.menuBox}>
         <div
           onClick={() => router.push("/")}
           className={

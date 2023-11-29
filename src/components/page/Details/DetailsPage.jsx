@@ -11,6 +11,7 @@ import {
   SendActionData,
 } from "../../../apis/DefaultAPI";
 import { useObserver } from "../../../hooks/useObserver";
+import { useTranslation } from "react-i18next";
 
 export default function DetailsPage() {
   const router = useRouter();
@@ -30,6 +31,8 @@ export default function DetailsPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [actions, setActions] = useState([]);
   const actionRef = useRef(actions);
+  const [showCopiedMessage, setShowCopiedMessage] = useState(false);
+  const { t } = useTranslation();
 
   useEffect(() => {
     async function FetchStickerSet() {
@@ -173,9 +176,11 @@ export default function DetailsPage() {
             >
               {detailedStickerSet.customName}
             </Link>
-            <p className={styles.description}>
-              {detailedStickerSet.description}
-            </p>
+            {detailedStickerSet.description && (
+              <p className={styles.description}>
+                {detailedStickerSet.description}
+              </p>
+            )}
           </div>
         </Col>
         <Col lg={12} className={styles.stickers}>
@@ -192,13 +197,13 @@ export default function DetailsPage() {
                 " " +
                 (detailedStickerSet.liked == true && styles.liked)
               }
-              onClick={() =>
+              onClick={() => {
                 onDetailedActionCallback(
                   detailedStickerSet.id,
                   "like",
                   !detailedStickerSet.liked,
-                )
-              }
+                );
+              }}
             >
               ❤️ {detailedStickerSet.likes}
             </div>
@@ -222,29 +227,43 @@ export default function DetailsPage() {
         </Col>
       </Row>
       <div className={styles.buttons}>
+        <span
+          className={
+            styles.copiedMessage +
+            " " +
+            (showCopiedMessage == true ? styles.showCopiedMessage : "")
+          }
+        >
+          {t("Link was copied to clipboard!")}
+        </span>
         <a
           className={styles.buttonShare}
           onClick={() => {
+            setShowCopiedMessage(true);
+            setTimeout(() => {
+              setShowCopiedMessage(false);
+            }, 2000);
+
             navigator.clipboard.writeText(
               `https://t.me/addstickers/${detailedStickerSet.name}`,
             );
           }}
         >
-          SHARE
+          {t("SHARE")}
         </a>
         <a
           className={styles.buttonAdd}
           href={`https://t.me/addstickers/${detailedStickerSet.name}`}
         >
-          ADD{" "}
+          {t("ADD")}{" "}
           {detailedStickerSet.stickersUrl &&
-            detailedStickerSet.stickersUrl.length}{" "}
-          STICKERS
+            detailedStickerSet.stickersUrl.length}
+          {t("STICKERS")}
         </a>
       </div>
       <div className={styles.recommendedText}>
         <div />
-        <span>Related sticker sets</span>
+        <span>{t("Related sticker sets")}</span>
         <div />
       </div>
       {stickerSets &&

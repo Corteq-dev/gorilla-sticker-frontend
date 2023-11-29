@@ -35,7 +35,7 @@
 }
 
 .stickers {
-  margin-top: 50px;
+  margin-top: 0;
 
   & img {
     width: 90px;
@@ -101,6 +101,7 @@
   padding: 16px 14px;
   letter-spacing: 1px;
   cursor: pointer;
+  z-index: 3;
 }
 
 .recommendedText {
@@ -139,4 +140,21 @@
 
 .liked {
   background-color: var(--tg-theme-hint-color);
+}
+
+.copiedMessage {
+  position: absolute;
+  padding: 5px 10px;
+  background-color: var(--tg-theme-bg-color);
+  transition: all 0.5s ease-in-out;
+  top: 0;
+  left: 0;
+  font-size: 12px;
+  border-radius: 20px;
+  opacity: 0;
+}
+
+.showCopiedMessage {
+  opacity: 1;
+  top: -40px;
 }
