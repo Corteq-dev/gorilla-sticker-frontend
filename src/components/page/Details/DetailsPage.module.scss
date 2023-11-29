@@ -38,8 +38,8 @@
   margin-top: 50px;
 
   & img {
-    width: 60px;
-    height: 60px;
+    width: 90px;
+    height: 90px;
     margin: 16px 8px;
   }
 }
@@ -56,23 +56,11 @@
   display: flex;
 }
 
-.emoji {
-  background-color: var(--tg-theme-bg-color);
-  font-size: 12.8px;
-  line-height: 19.2px;
-  margin-right: 8px;
-  padding: 8px 16px;
-  user-select: none;
-  font-weight: 600;
-  border-radius: 16px;
-  color: var(--tg-theme-text-color);
-}
-
 .slide {
   background-size: 500% 500%;
   border-radius: 8px;
-  width: 60px;
-  height: 60px;
+  width: 90px;
+  height: 90px;
 }
 
 .buttons {
@@ -112,6 +100,7 @@
   margin-right: 16px;
   padding: 16px 14px;
   letter-spacing: 1px;
+  cursor: pointer;
 }
 
 .recommendedText {
@@ -133,4 +122,21 @@
     padding: 0 10px;
     text-align: center;
   }
+}
+
+.emoji {
+  background-color: var(--tg-theme-bg-color);
+  font-size: 12.8px;
+  line-height: 19.2px;
+  margin-right: 8px;
+  padding: 8px 16px;
+  user-select: none;
+  font-weight: 600;
+  border-radius: 16px;
+  color: var(--tg-theme-text-color);
+  cursor: pointer;
+}
+
+.liked {
+  background-color: var(--tg-theme-hint-color);
 }

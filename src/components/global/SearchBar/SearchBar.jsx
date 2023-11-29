@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styles from "./SearchBar.module.scss";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
@@ -21,6 +21,7 @@ const SearchBar = () => {
     setPage,
     setDateFilter,
   } = useStickers();
+  const didMountRef = useRef(false);
 
   const sortTypeButton = [
     {
@@ -62,29 +63,39 @@ const SearchBar = () => {
   }, [pageOffsetY]);
 
   useEffect(() => {
-    setIsNew(window.location.pathname === "/");
+    setIsNew(
+      window.location.pathname === "/"
+        ? true
+        : window.location.pathname === "/popular"
+        ? false
+        : null,
+    );
   }, []);
 
   useEffect(() => {
-    if (searchDelayTimer) {
-      clearTimeout(searchDelayTimer);
-    }
+    if (didMountRef.current) {
+      if (searchDelayTimer) {
+        clearTimeout(searchDelayTimer);
+      }
 
-    if (searchText) {
-      const newSearchDelayTimer = setTimeout(async () => {
-        setCanLoad(false);
-        const newStickerSets = await Search(searchText);
-        setStickerSets(newStickerSets);
+      if (searchText) {
+        const newSearchDelayTimer = setTimeout(async () => {
+          setCanLoad(false);
+          const newStickerSets = await Search(searchText);
+          setStickerSets(newStickerSets);
 
-        setPage(0);
-        if (newStickerSets.length == 10)
-          setTimeout(() => setCanLoad(true), 500);
-      }, 500);
+          setPage(0);
+          if (newStickerSets.length == 10)
+            setTimeout(() => setCanLoad(true), 500);
+        }, 500);
 
-      setSearchDelayTimer(newSearchDelayTimer);
+        setSearchDelayTimer(newSearchDelayTimer);
+      } else {
+        setTimeout(() => setCanLoad(true), 500);
+        setPage(-1);
+      }
     } else {
-      setTimeout(() => setCanLoad(true), 500);
-      setPage(-1);
+      didMountRef.current = true;
     }
   }, [searchText]);
 
@@ -100,11 +111,27 @@ const SearchBar = () => {
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
           />
-          <div onClick={() => router.push("/info")} className={styles.infoBox}>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-              <path d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 128c17.67 0 32 14.33 32 32c0 17.67-14.33 32-32 32S224 177.7 224 160C224 142.3 238.3 128 256 128zM296 384h-80C202.8 384 192 373.3 192 360s10.75-24 24-24h16v-64H224c-13.25 0-24-10.75-24-24S210.8 224 224 224h32c13.25 0 24 10.75 24 24v88h16c13.25 0 24 10.75 24 24S309.3 384 296 384z"></path>
-            </svg>
-          </div>
+          {searchText == "" ? (
+            <div
+              onClick={() => router.push("/info")}
+              className={styles.infoBox}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                <path d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 128c17.67 0 32 14.33 32 32c0 17.67-14.33 32-32 32S224 177.7 224 160C224 142.3 238.3 128 256 128zM296 384h-80C202.8 384 192 373.3 192 360s10.75-24 24-24h16v-64H224c-13.25 0-24-10.75-24-24S210.8 224 224 224h32c13.25 0 24 10.75 24 24v88h16c13.25 0 24 10.75 24 24S309.3 384 296 384z"></path>
+              </svg>
+            </div>
+          ) : (
+            <div onClick={() => setSearchText("")} className={styles.infoBox}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="2.6em"
+                viewBox="-10 60 384 512"
+                className={styles.colorChange}
+              >
+                <path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"></path>
+              </svg>
+            </div>
+          )}
         </div>
       </div>
       <div
@@ -127,7 +154,7 @@ const SearchBar = () => {
           }
         >
           {t("Popular")}
-          {!isNew && (
+          {isNew == false && (
             <div className={styles.sortBar}>
               <button
                 className={styles.toggleSortOpen}
@@ -146,6 +173,7 @@ const SearchBar = () => {
                       onClick={() => {
                         setSortType(button.id);
                         setDateFilter(button.value);
+                        setIsSortOpen(false);
                       }}
                     >
                       {button.text}
@@ -160,7 +188,11 @@ const SearchBar = () => {
           className={
             styles.scrollBar +
             " " +
-            (isNew == false ? styles.moveLeft : styles.moveRight)
+            (isNew == false
+              ? styles.moveLeft
+              : isNew == true
+              ? styles.moveRight
+              : styles.hide)
           }
         ></span>
       </div>

@@ -4,7 +4,6 @@ import StickerSet from "../../global/StickerSet/StickerSet";
 import { Container } from "react-bootstrap";
 import { useStickers } from "../../../contexts/StickerContext";
 import {
-  GetNewStickers,
   SendActionData,
   Search,
   GetPopularStickers,
@@ -28,6 +27,7 @@ export default function IndexPage() {
   const [actions, setActions] = useState([]);
   const actionRef = useRef(actions);
   const [isLoading, setIsLoading] = useState(false);
+  const didMountRef = useRef(false);
 
   function onActionCallback(stickerSetId, action, status) {
     if (action == "like") ChangeLiked(stickerSetId, status);
@@ -78,6 +78,12 @@ export default function IndexPage() {
     async function fetchData(page) {
       if (!canLoad) return;
 
+      // To force update page state
+      if (page < -1) {
+        setPage(0);
+        return;
+      }
+
       setCanLoad(false);
       setIsLoading(true);
 
@@ -86,10 +92,11 @@ export default function IndexPage() {
         data = await Search(searchText, page * 10);
       else data = await GetPopularStickers(page * 10, 10, dateFilter);
 
-      if (page == 0) setStickerSets(data);
+      if (page === 0) setStickerSets(data);
       else AddStickerSets(data);
+
       setIsLoading(false);
-      if (data.length == 10) setTimeout(() => setCanLoad(true), 250);
+      if (data.length >= 10) setTimeout(() => setCanLoad(true), 250);
     }
 
     fetchData(page);
@@ -100,9 +107,17 @@ export default function IndexPage() {
   }, []);
 
   useEffect(() => {
-    setCanLoad(true);
-    setPage(0);
+    if (didMountRef.current) {
+      setCanLoad(true);
+      setPage(-10);
+    } else {
+      didMountRef.current = true;
+    }
   }, [dateFilter]);
+
+  useEffect(() => {
+    console.log(`Can load: ${canLoad}, page: ${page}, isLoading: ${isLoading}`);
+  }, [canLoad]);
 
   return (
     <Container className={styles.container}>

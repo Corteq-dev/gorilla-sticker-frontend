@@ -7,6 +7,7 @@
   border-radius: 0;
   outline: none;
   background-color: var(--tg-theme-secondary-bg-color);
+  color: var(--tg-theme-button-text-color);
 }
 
 .searchImage {
@@ -186,4 +187,8 @@
 .moveRight {
   left: 0;
   transition: left 0.5s ease;
+}
+
+.hide {
+  display: none;
 }

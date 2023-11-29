@@ -15,28 +15,6 @@ export function StickerProvider({ children }) {
 
   const [detailedStickerSet, setDetailedStickerSet] = useState({});
 
-  function setDetailedSticker(id) {
-    // TODO: API call
-    setDetailedStickerSet({
-      name: "test 2",
-      id: 1,
-      description:
-        "Лето и сезон отпусков потихоньку подходит к концу, и Хопперспешит наверстать упущенное. Заскакивайте и вы в последний вагон, чтобы провести остатки",
-      stickersUrl: [
-        testUrl,
-        testUrl,
-        testUrl,
-        testUrl,
-        testUrl,
-        testUrl,
-        testUrl,
-        testUrl,
-        testUrl,
-        testUrl,
-      ],
-    });
-  }
-
   function AddStickerSets(newStickerSets) {
     if (newStickerSets)
       setStickerSets((currentStickers) => [
@@ -83,7 +61,7 @@ export function StickerProvider({ children }) {
         detailedStickerSet,
         searchText,
         setSearchText,
-        setDetailedSticker,
+        setDetailedStickerSet,
         AddStickerSets,
         ChangeLiked,
         ChangeFavourite,

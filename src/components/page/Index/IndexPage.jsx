@@ -21,6 +21,7 @@ export default function IndexPage() {
     setCanLoad,
     page,
     setPage,
+    setStickerSets,
   } = useStickers();
   const [actions, setActions] = useState([]);
   const actionRef = useRef(actions);
@@ -83,9 +84,11 @@ export default function IndexPage() {
         data = await Search(searchText, page * 10);
       else data = await GetNewStickers(page * 10);
 
-      AddStickerSets(data);
+      if (page === 0) setStickerSets(data);
+      else AddStickerSets(data);
+
       setIsLoading(false);
-      if (data.length == 10) setTimeout(() => setCanLoad(true), 250);
+      if (data.length >= 10) setTimeout(() => setCanLoad(true), 250);
     }
 
     fetchData(page);

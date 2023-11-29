@@ -24,7 +24,20 @@ export async function GetNewStickers(offset = 0, limit = 10) {
         "&limit=" +
         limit,
     );
-    return res.data;
+
+    let sponsoredStickers = [];
+    // Adding sponsored stickers
+    if (offset == 0) sponsoredStickers = await GetSponsoredStickers();
+
+    // Use this weird constraction to get rid of duplicates
+    return Array.from(
+      [...sponsoredStickers, ...res.data]
+        .reduce((map, stickerSet) => {
+          map.set(stickerSet.id, stickerSet);
+          return map;
+        }, new Map())
+        .values(),
+    );
   });
 }
 
@@ -45,7 +58,20 @@ export async function GetPopularStickers(
         "&dateFilter=" +
         dateFilter,
     );
-    return res.data;
+
+    let sponsoredStickers = [];
+    // Adding sponsored stickers
+    if (offset == 0) sponsoredStickers = await GetSponsoredStickers();
+
+    // Use this weird constraction to get rid of duplicates
+    return Array.from(
+      [...sponsoredStickers, ...res.data]
+        .reduce((map, stickerSet) => {
+          map.set(stickerSet.id, stickerSet);
+          return map;
+        }, new Map())
+        .values(),
+    );
   });
 }
 
@@ -62,7 +88,20 @@ export async function Search(text, offset = 0, limit = 10) {
         "&text=" +
         text,
     );
-    return res.data;
+
+    let sponsoredStickers = [];
+    // Adding sponsored stickers
+    if (offset == 0) sponsoredStickers = await GetSponsoredStickers();
+
+    // Use this weird constraction to get rid of duplicates
+    return Array.from(
+      [...sponsoredStickers, ...res.data]
+        .reduce((map, stickerSet) => {
+          map.set(stickerSet.id, stickerSet);
+          return map;
+        }, new Map())
+        .values(),
+    );
   });
 }
 
@@ -79,6 +118,67 @@ export async function SendActionData(actions) {
       },
     },
   );
+}
+
+export async function GetDetailedStickerSet(stickerSetId) {
+  return retry(10, async () => {
+    const res = await axios.get(
+      APIConfigs.GorillaSticker.url +
+        "/stickerSet?userId=" +
+        window.Telegram.WebApp.initDataUnsafe.user.id +
+        "&stickerId=" +
+        stickerSetId,
+    );
+    return res.data;
+  });
+}
+
+export async function GetSimilarStickers(
+  customName,
+  description,
+  offset = 0,
+  limit = 10,
+) {
+  return retry(10, async () => {
+    const res = await axios.get(
+      APIConfigs.GorillaSticker.url +
+        "/similarStickers?userId=" +
+        window.Telegram.WebApp.initDataUnsafe.user.id +
+        "&offset=" +
+        offset +
+        "&limit=" +
+        limit +
+        "&customName=" +
+        encodeURIComponent(customName) +
+        "&description=" +
+        encodeURIComponent(description),
+    );
+
+    let sponsoredStickers = [];
+    // Adding sponsored stickers
+    if (offset == 0) sponsoredStickers = await GetSponsoredStickers();
+
+    // Use this weird constraction to get rid of duplicates
+    return Array.from(
+      [...sponsoredStickers, ...res.data]
+        .reduce((map, stickerSet) => {
+          map.set(stickerSet.id, stickerSet);
+          return map;
+        }, new Map())
+        .values(),
+    );
+  });
+}
+
+export async function GetSponsoredStickers() {
+  return retry(10, async () => {
+    const res = await axios.get(
+      APIConfigs.GorillaSticker.url +
+        "/stickers/sponsored?userId=" +
+        window.Telegram.WebApp.initDataUnsafe.user.id,
+    );
+    return res.data;
+  });
 }
 
 function retry(maxRetries, fn) {
