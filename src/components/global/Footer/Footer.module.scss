@@ -1,0 +1,43 @@
+.container {
+  position: fixed;
+  bottom: 0;
+  height: 70px;
+  padding-top: 10px;
+  width: 100%;
+  background-color: var(--tg-theme-bg-color);
+  display: flex;
+  justify-content: space-around;
+  transition: 0.5s linear;
+  z-index: 100;
+}
+
+.hidden {
+  bottom: -70px;
+}
+
+.option {
+  width: 80px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  cursor: pointer;
+
+  & svg {
+    width: 40px;
+    height: 40px;
+    filter: brightness(3.5);
+  }
+
+  & span {
+    font-size: 14px;
+    color: var(--tg-theme-button-text-color);
+  }
+}
+
+.active {
+  & span {
+    color: #2481cc;
+  }
+}

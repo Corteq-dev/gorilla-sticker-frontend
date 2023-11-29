@@ -8,6 +8,7 @@ export default function StickerSet({
   stickerSet,
   className,
   onActionCallback,
+  canAdd = true,
 }) {
   return (
     <Row className={styles.wrapper}>
@@ -41,12 +42,14 @@ export default function StickerSet({
         </Swiper>
       </Col>
       <Col lg={6} className={styles.footer}>
-        <a
-          href={`https://t.me/addstickers/${stickerSet.name}`}
-          className={styles.button}
-        >
-          ADD
-        </a>
+        {canAdd && (
+          <a
+            href={`https://t.me/addstickers/${stickerSet.name}`}
+            className={styles.button}
+          >
+            ADD
+          </a>
+        )}
         <div className={styles.emojis}>
           <div
             className={

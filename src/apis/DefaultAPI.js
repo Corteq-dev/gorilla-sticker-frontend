@@ -181,6 +181,47 @@ export async function GetSponsoredStickers() {
   });
 }
 
+export async function GetUserFavouriteStickers(offset = 0, limit = 10) {
+  return retry(10, async () => {
+    const res = await axios.get(
+      APIConfigs.GorillaSticker.url +
+        "/userFavorites?userId=" +
+        window.Telegram.WebApp.initDataUnsafe.user.id +
+        "&offset=" +
+        offset +
+        "&limit=" +
+        limit,
+    );
+    return MakeUnique(res.data);
+  });
+}
+
+export async function GetUserStickers(offset = 0, limit = 10) {
+  return retry(10, async () => {
+    const res = await axios.get(
+      APIConfigs.GorillaSticker.url +
+        "/userStickers?userId=" +
+        window.Telegram.WebApp.initDataUnsafe.user.id +
+        "&offset=" +
+        offset +
+        "&limit=" +
+        limit,
+    );
+    return MakeUnique(res.data);
+  });
+}
+
+function MakeUnique(array) {
+  return Array.from(
+    array
+      .reduce((map, stickerSet) => {
+        map.set(stickerSet.id, stickerSet);
+        return map;
+      }, new Map())
+      .values(),
+  );
+}
+
 function retry(maxRetries, fn) {
   return fn().catch(function (err) {
     if (maxRetries <= 0) {
