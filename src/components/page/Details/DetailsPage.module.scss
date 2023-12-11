@@ -36,8 +36,10 @@
 
 .stickers {
   margin-top: 0;
+  display: contents;
 
-  & img {
+  & img,
+  & div {
     width: 90px;
     height: 90px;
     margin: 16px 8px;

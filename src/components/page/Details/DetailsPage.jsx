@@ -12,6 +12,8 @@ import {
 } from "../../../apis/DefaultAPI";
 import { useObserver } from "../../../hooks/useObserver";
 import { useTranslation } from "react-i18next";
+import LazyLoadedLottie from "../../global/LazyLoadedLottie";
+import LazyLoadedVideo from "../../global/LazyLoadedVideo";
 
 export default function DetailsPage() {
   const router = useRouter();
@@ -29,8 +31,7 @@ export default function DetailsPage() {
     ChangeFavourite,
   } = useStickers();
   const [isLoading, setIsLoading] = useState(false);
-  const [actions, setActions] = useState([]);
-  const actionRef = useRef(actions);
+  const [canDoAction, setCanDoAction] = useState(true);
   const [showCopiedMessage, setShowCopiedMessage] = useState(false);
   const { t } = useTranslation();
 
@@ -50,7 +51,6 @@ export default function DetailsPage() {
   });
   useEffect(() => {
     async function fetchData(page) {
-      console.log(detailedStickerSet);
       if (!canLoad || !detailedStickerSet.id) return;
 
       setCanLoad(false);
@@ -79,7 +79,8 @@ export default function DetailsPage() {
   }, []);
 
   function onDetailedActionCallback(stickerSetId, action, status) {
-    if (action == "like")
+    if (!canDoAction) return;
+    if (action == "like") {
       setDetailedStickerSet({
         ...detailedStickerSet,
         liked: status,
@@ -88,7 +89,8 @@ export default function DetailsPage() {
             ? detailedStickerSet.likes + 1
             : detailedStickerSet.likes - 1,
       });
-    else
+      SendActionData([{ stickerSetId, like: status }]);
+    } else {
       setDetailedStickerSet({
         ...detailedStickerSet,
         addedToFavorites: status,
@@ -97,98 +99,28 @@ export default function DetailsPage() {
             ? detailedStickerSet.favorites + 1
             : detailedStickerSet.favorites - 1,
       });
-
-    setActions((currentActions) => {
-      if (currentActions.find((r) => r.stickerSetId == stickerSetId) == null) {
-        if (action == "like")
-          return [...currentActions, { stickerSetId, like: status }];
-        else return [...currentActions, { stickerSetId, favorite: status }];
-      } else {
-        return currentActions.map((r) => {
-          if (r.stickerSetId === stickerSetId) {
-            if (action == "like")
-              return {
-                stickerSetId,
-                like: r.like == true ? null : status,
-                favorite: r.favorite,
-              };
-            else
-              return {
-                stickerSetId,
-                like: r.like,
-                favorite: r.favorite == true ? null : status,
-              };
-          } else return r;
-        });
-      }
-    });
+      ChangeFavourite(stickerSetId, status);
+    }
+    setCanDoAction(false);
+    setTimeout(() => {
+      setCanDoAction(true);
+    }, 500);
   }
 
   function onActionCallback(stickerSetId, action, status) {
-    const stickerSet = stickerSets.find((item) => item.id === stickerSetId);
-
-    setActions((currentActions) => {
-      if (currentActions.find((r) => r.stickerSetId == stickerSetId) == null) {
-        if (action == "like")
-          return [
-            ...currentActions,
-            {
-              stickerSetId,
-              like: !stickerSet.liked,
-              initialLike: stickerSet.liked,
-              initialFav: stickerSet.addedToFavorites,
-            },
-          ];
-        else
-          return [
-            ...currentActions,
-            {
-              stickerSetId,
-              favorite: !stickerSet.addedToFavorites,
-              initialLike: stickerSet.liked,
-              initialFav: stickerSet.addedToFavorites,
-            },
-          ];
-      } else {
-        return currentActions.map((r) => {
-          if (r.stickerSetId === stickerSetId) {
-            if (action == "like")
-              return {
-                ...r,
-                like: r.like == undefined ? !r.initialLike : !r.like,
-              };
-            else
-              return {
-                ...r,
-                favorite: r.favorite == undefined ? !r.initialFav : !r.favorite,
-              };
-          } else return r;
-        });
-      }
-    });
-
-    if (action == "like") ChangeLiked(stickerSetId, status);
-    else ChangeFavourite(stickerSetId, status);
+    if (!canDoAction) return;
+    if (action == "like") {
+      SendActionData([{ stickerSetId, like: status }]);
+      ChangeLiked(stickerSetId, status);
+    } else {
+      SendActionData([{ stickerSetId, favorite: status }]);
+      ChangeFavourite(stickerSetId, status);
+    }
+    setCanDoAction(false);
+    setTimeout(() => {
+      setCanDoAction(true);
+    }, 500);
   }
-
-  useEffect(() => {
-    return () => {
-      if (actionRef.current.length > 0) {
-        const data = actionRef.current.map((item) => {
-          return {
-            stickerSetId: item.stickerSetId,
-            like: item.like === item.initialLike ? null : item.like,
-            favorite: item.favorite === item.initialFav ? null : item.favorite,
-          };
-        });
-        SendActionData(data);
-      }
-    };
-  }, []);
-
-  useEffect(() => {
-    actionRef.current = actions;
-  }, [actions]);
 
   return (
     <Container className={styles.container}>
@@ -212,24 +144,18 @@ export default function DetailsPage() {
         <Col lg={12} className={styles.stickers}>
           {detailedStickerSet.stickersUlr &&
             detailedStickerSet.stickersUlr.map((item, index) => (
-              <>
+              <div key={index}>
                 {item.slice(item.length - 4) == ".tgs" ? (
-                  <tgs-player
-                    id={`${detailedStickerSet}-${index}`}
-                    autoplay
-                    loop
-                    mode="normal"
-                    src={item}
+                  <LazyLoadedLottie
+                    animationPath={item}
                     style={{ width: 90, height: 90 }}
-                  ></tgs-player>
+                  />
                 ) : item.slice(item.length - 5) == ".webm" ? (
-                  <video width="90" height="90" playsinline autoPlay loop muted>
-                    <source src={item} type="video/webm" />
-                  </video>
+                  <LazyLoadedVideo videoSource={item} />
                 ) : (
                   <img src={item} />
                 )}
-              </>
+              </div>
             ))}
         </Col>
         <Col lg={6} className={styles.footer}>

@@ -3,6 +3,8 @@ import styles from "./StickerSet.module.scss";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, FreeMode } from "swiper/modules";
 import Link from "next/link";
+import LazyLoadedLottie from "../LazyLoadedLottie";
+import LazyLoadedVideo from "../LazyLoadedVideo";
 
 export default function StickerSet({
   stickerSet,
@@ -37,26 +39,12 @@ export default function StickerSet({
             stickerSet.stickersUlr.map((item, index) => (
               <SwiperSlide key={index} className={styles.slide}>
                 {item.slice(item.length - 4) == ".tgs" ? (
-                  <tgs-player
-                    id={`tgs-player-${stickerSet.id}-${index}`}
-                    autoplay
-                    loop
-                    mode="normal"
-                    src={item}
+                  <LazyLoadedLottie
+                    animationPath={item}
                     style={{ width: 90, height: 90 }}
-                  ></tgs-player>
+                  />
                 ) : item.slice(item.length - 5) == ".webm" ? (
-                  <video
-                    width="90"
-                    height="90"
-                    playsinline
-                    autoPlay
-                    loop
-                    muted
-                    id={`video-${stickerSet.id}-${index}`}
-                  >
-                    <source src={item} type="video/webm" />
-                  </video>
+                  <LazyLoadedVideo videoSource={item} key={index} />
                 ) : (
                   <img src={item} />
                 )}
