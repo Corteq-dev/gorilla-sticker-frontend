@@ -47,7 +47,12 @@ export default function StickerSet({
                 ) : item.slice(item.length - 5) == ".webm" ? (
                   <LazyLoadedVideo videoSource={item} key={index} />
                 ) : (
-                  <Image src={item} width={90} height={90} />
+                  <Image
+                    src={item}
+                    width={90}
+                    height={90}
+                    alt={`Gorrila sticker - ${stickerSet.id} - ${index}`}
+                  />
                 )}
               </SwiperSlide>
             ))}
