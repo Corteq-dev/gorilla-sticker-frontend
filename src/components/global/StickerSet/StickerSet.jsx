@@ -5,6 +5,7 @@ import { Pagination, FreeMode } from "swiper/modules";
 import Link from "next/link";
 import LazyLoadedLottie from "../LazyLoadedLottie";
 import LazyLoadedVideo from "../LazyLoadedVideo";
+import Image from "next/image";
 
 export default function StickerSet({
   stickerSet,
@@ -46,7 +47,7 @@ export default function StickerSet({
                 ) : item.slice(item.length - 5) == ".webm" ? (
                   <LazyLoadedVideo videoSource={item} key={index} />
                 ) : (
-                  <img src={item} />
+                  <Image src={item} width={90} height={90} />
                 )}
               </SwiperSlide>
             ))}
