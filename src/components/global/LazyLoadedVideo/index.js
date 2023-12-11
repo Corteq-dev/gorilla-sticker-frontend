@@ -21,6 +21,16 @@ const LazyLoadedVideo = ({ videoSource }) => {
 
     observer.observe(video);
 
+    // Check if the element is initially visible
+    if (
+      video.getBoundingClientRect().top < window.innerHeight &&
+      video.getBoundingClientRect().left < window.innerWidth
+    ) {
+      setTimeout(() => {
+        video.play();
+      }, 500);
+    }
+
     return () => {
       observer.disconnect();
     };

@@ -11,10 +11,8 @@ const LazyLoadedLottie = ({ animationPath, style }) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             container.play();
-            container.setLooping(true);
           } else {
             container.pause();
-            container.setLooping(false);
           }
         });
       };
@@ -22,14 +20,20 @@ const LazyLoadedLottie = ({ animationPath, style }) => {
       const observer = new IntersectionObserver(handleIntersection, {
         root: null,
         rootMargin: "0px",
-        threshold: 0.5, // Adjust the threshold based on your needs
+        threshold: 0.3, // Adjust the threshold based on your needs
       });
 
       observer.observe(container);
 
       // Check if the element is initially visible
-      if (container.getBoundingClientRect().top < window.innerHeight)
-        container.play();
+      if (
+        container.getBoundingClientRect().top < window.innerHeight &&
+        container.getBoundingClientRect().left < window.innerWidth
+      ) {
+        setTimeout(() => {
+          container.play();
+        }, 500);
+      }
 
       return () => {
         observer.disconnect();
@@ -42,6 +46,7 @@ const LazyLoadedLottie = ({ animationPath, style }) => {
       ref={containerRef}
       src={animationPath}
       style={style}
+      loop
       mode="normal"
     />
   );
