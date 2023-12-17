@@ -17,7 +17,6 @@ export default function Home() {
 
   return (
     <StickerProvider>
-      <SearchBar />
       <DetailsPage />
       <Footer />
     </StickerProvider>

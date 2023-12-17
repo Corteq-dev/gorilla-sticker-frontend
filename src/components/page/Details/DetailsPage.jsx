@@ -127,7 +127,6 @@ export default function DetailsPage() {
 
   return (
     <Container className={styles.container}>
-      <div className={styles.placeholder}></div>
       <Row>
         <Col lg={12} className={styles.header}>
           <div className={styles.headerText}>
