@@ -4,6 +4,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import { useStickers } from "../../../contexts/StickerContext";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import Image from "next/image";
 import StickerSet from "../../global/StickerSet/StickerSet";
 import {
   GetDetailedStickerSet,
@@ -14,6 +15,7 @@ import { useObserver } from "../../../hooks/useObserver";
 import { useTranslation } from "react-i18next";
 import LazyLoadedLottie from "../../global/LazyLoadedLottie";
 import LazyLoadedVideo from "../../global/LazyLoadedVideo";
+import ReportPopup from "../../global/ReportPopup/ReportPopup";
 
 export default function DetailsPage() {
   const router = useRouter();
@@ -33,6 +35,7 @@ export default function DetailsPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [canDoAction, setCanDoAction] = useState(true);
   const [showCopiedMessage, setShowCopiedMessage] = useState(false);
+  const [showReportPopup, setShowReportPopup] = useState(false);
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -144,7 +147,7 @@ export default function DetailsPage() {
         <Col lg={12} className={styles.stickers}>
           {detailedStickerSet.stickersUlr &&
             detailedStickerSet.stickersUlr.map((item, index) => (
-              <div key={index}>
+              <span key={index}>
                 {item.slice(item.length - 4) == ".tgs" ? (
                   <LazyLoadedLottie
                     animationPath={item}
@@ -153,9 +156,14 @@ export default function DetailsPage() {
                 ) : item.slice(item.length - 5) == ".webm" ? (
                   <LazyLoadedVideo videoSource={item} />
                 ) : (
-                  <img src={item} />
+                  <Image
+                    width={90}
+                    height={90}
+                    src={item}
+                    alt={`sticker-set-${detailedStickerSet.id}-${index}`}
+                  />
                 )}
-              </div>
+              </span>
             ))}
         </Col>
         <Col lg={6} className={styles.footer}>
@@ -196,30 +204,40 @@ export default function DetailsPage() {
         </Col>
       </Row>
       <div className={styles.buttons}>
-        <span
-          className={
-            styles.copiedMessage +
-            " " +
-            (showCopiedMessage == true ? styles.showCopiedMessage : "")
-          }
-        >
-          {t("Link was copied to clipboard!")}
-        </span>
         <a
           className={styles.buttonShare}
           onClick={() => {
-            setShowCopiedMessage(true);
-            setTimeout(() => {
-              setShowCopiedMessage(false);
-            }, 2000);
-
-            navigator.clipboard.writeText(
-              `https://t.me/addstickers/${detailedStickerSet.name}`,
-            );
+            setShowReportPopup(true);
           }}
         >
-          {t("SHARE")}
+          {t("REPORT")}
         </a>
+        <div className={styles.copiedMessageContainer}>
+          <span
+            className={
+              styles.copiedMessage +
+              " " +
+              (showCopiedMessage == true ? styles.showCopiedMessage : "")
+            }
+          >
+            {t("Link was copied to clipboard!")}
+          </span>
+          <a
+            className={styles.buttonShare}
+            onClick={() => {
+              setShowCopiedMessage(true);
+              setTimeout(() => {
+                setShowCopiedMessage(false);
+              }, 2000);
+
+              navigator.clipboard.writeText(
+                `https://t.me/addstickers/${detailedStickerSet.name}`,
+              );
+            }}
+          >
+            {t("SHARE")}
+          </a>
+        </div>
         <a
           className={styles.buttonAdd}
           href={`https://t.me/addstickers/${detailedStickerSet.name}`}
@@ -245,6 +263,13 @@ export default function DetailsPage() {
           />
         ))}
       <div ref={lastElement} />
+      <ReportPopup
+        show={showReportPopup}
+        stickerSetId={detailedStickerSet.id}
+        onHide={() => {
+          setShowReportPopup(false);
+        }}
+      />
     </Container>
   );
 }

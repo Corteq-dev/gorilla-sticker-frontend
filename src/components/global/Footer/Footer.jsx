@@ -7,12 +7,13 @@ const Footer = () => {
   const [show, setShow] = useState(true);
   const [pageOffsetY, setPageOffsetY] = useState(0);
   const [isFav, setIsFav] = useState(null);
+  const [lock, setLock] = useState(true);
 
   const router = useRouter();
   const { t } = useTranslation();
 
   const controlNavbar = () => {
-    setShow(window.scrollY < pageOffsetY);
+    if (!lock) setShow(window.scrollY < pageOffsetY);
     setPageOffsetY(window.scrollY);
   };
 
@@ -32,6 +33,7 @@ const Footer = () => {
         ? false
         : null,
     );
+    setTimeout(() => setLock(false), 500);
   }, []);
 
   return (

@@ -36,13 +36,18 @@
 
 .stickers {
   margin-top: 0;
-  display: contents;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  overflow: hidden;
 
   & img,
   & div {
     width: 90px;
     height: 90px;
     margin: 16px 8px;
+    object-fit: contain;
+    display: inline-block;
   }
 }
 
@@ -66,16 +71,13 @@
 }
 
 .buttons {
-  position: sticky;
-  bottom: 32px;
+  position: relative;
   display: flex;
   align-items: center;
   flex-direction: row;
   justify-content: center;
-  margin: 0 auto 32px;
-  max-width: calc(var(--app-max-width) - 32px);
-  width: calc(100% - 32px);
   z-index: 99;
+  margin: 10px 0;
 }
 
 .buttonAdd {
@@ -84,7 +86,7 @@
   font-size: 12px;
   font-weight: 600;
   margin-left: 16px;
-  padding: 16px 18px;
+  padding: 16px 14px;
   -webkit-tap-highlight-color: transparent;
   color: var(--tg-theme-button-text-color);
   user-select: none;
@@ -144,19 +146,25 @@
   background-color: var(--tg-theme-hint-color);
 }
 
+.copiedMessageContainer {
+  position: relative;
+}
+
 .copiedMessage {
   position: absolute;
   padding: 5px 10px;
   background-color: var(--tg-theme-bg-color);
   transition: all 0.5s ease-in-out;
   top: 0;
-  left: 0;
+  left: -50%;
   font-size: 12px;
   border-radius: 20px;
   opacity: 0;
+  z-index: -1;
+  white-space: nowrap;
 }
 
 .showCopiedMessage {
   opacity: 1;
-  top: -40px;
+  top: -50px;
 }

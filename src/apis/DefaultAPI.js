@@ -120,6 +120,22 @@ export async function SendActionData(actions) {
   );
 }
 
+export async function SendReportData(stickerSetId, data) {
+  await axios.post(
+    APIConfigs.GorillaSticker.url + "/sendReportData",
+    {
+      userId: window.Telegram.WebApp.initDataUnsafe.user.id,
+      stickerSetId,
+      data,
+    },
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    },
+  );
+}
+
 export async function GetDetailedStickerSet(stickerSetId) {
   return retry(10, async () => {
     const res = await axios.get(

@@ -1,0 +1,55 @@
+.modal {
+  color: var(--tg-theme-button-text-color);
+  background-color: var(--tg-theme-bg-color);
+
+  & textarea {
+    color: var(--tg-theme-button-text-color);
+    background-color: var(--tg-theme-bg-color);
+    border: 1px solid var(--tg-theme-button-color);
+
+    &:hover,
+    &:focus {
+      color: var(--tg-theme-button-text-color);
+      background-color: var(--tg-theme-bg-color);
+    }
+  }
+
+  .submitButton {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+
+    & button {
+      background-color: var(--tg-theme-button-color);
+      border-color: var(--tg-theme-button-color);
+    }
+  }
+
+  .submitted {
+    & button {
+      background-color: green;
+    }
+  }
+}
+
+.wrapper {
+  width: 20px;
+  margin: 10px;
+}
+
+.checkmark {
+  stroke: green;
+  stroke-dashoffset: 745.7485;
+  stroke-dasharray: 745.7485;
+  animation: dash 2s ease-out forwards infinite;
+}
+
+@keyframes dash {
+  0% {
+    stroke-dashoffset: 745.7485;
+  }
+
+  100% {
+    stroke-dashoffset: 0;
+  }
+}

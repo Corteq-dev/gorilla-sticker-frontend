@@ -13,6 +13,7 @@ const SearchBar = () => {
   const [searchDelayTimer, setSearchDelayTimer] = useState(null);
   const [sortType, setSortType] = useState(0);
   const [isSortOpen, setIsSortOpen] = useState(false);
+  const [lock, setLock] = useState(true);
   const {
     setSearchText,
     searchText,
@@ -50,7 +51,8 @@ const SearchBar = () => {
   const { t } = useTranslation();
 
   const controlNavbar = () => {
-    setShow(window.scrollY < pageOffsetY);
+    if (!lock) setShow(window.scrollY < pageOffsetY);
+
     setPageOffsetY(window.scrollY > 0 ? window.scrollY : 0);
   };
 
@@ -70,6 +72,7 @@ const SearchBar = () => {
         ? false
         : null,
     );
+    setTimeout(() => setLock(false), 500);
   }, []);
 
   useEffect(() => {
