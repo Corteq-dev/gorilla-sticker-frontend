@@ -6,11 +6,14 @@ import "../i18n";
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
 import { GetLocale } from "../apis/DefaultAPI";
+import { useRouter } from "next/router";
 
 export default function App({ Component, pageProps }) {
   const { t, i18n } = useTranslation();
+  const router = useRouter();
 
   useEffect(() => {
+    const isDetailsPage = window.location.pathname.includes("/details/");
     const script = document.createElement("script");
     script.src = "https://telegram.org/js/telegram-web-app.js";
     script.async = true;
@@ -34,6 +37,10 @@ export default function App({ Component, pageProps }) {
         i18n.changeLanguage(locale);
         window.Telegram.WebApp.ready();
         window.Telegram.WebApp.expand();
+        window.Telegram.WebApp.BackButton.onClick(() => router.back());
+
+        if (isDetailsPage) window.Telegram.WebApp.BackButton.show();
+        else window.Telegram.WebApp.BackButton.hide();
       },
       false,
     );
