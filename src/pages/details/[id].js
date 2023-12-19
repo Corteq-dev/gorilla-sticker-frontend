@@ -1,7 +1,5 @@
-import SearchBar from "../../components/global/SearchBar/SearchBar";
 import { StickerProvider } from "../../contexts/StickerContext";
 import DetailsPage from "../../components/page/Details/DetailsPage";
-import Footer from "../../components/global/Footer/Footer";
 import { useEffect } from "react";
 
 export default function Home() {

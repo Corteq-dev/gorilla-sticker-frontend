@@ -42,16 +42,21 @@ export default function StickerSet({
                 {item.slice(item.length - 4) == ".tgs" ? (
                   <LazyLoadedLottie
                     animationPath={item}
-                    style={{ width: 90, height: 90 }}
+                    style={{ height: 90, width: 90 }}
                   />
                 ) : item.slice(item.length - 5) == ".webm" ? (
-                  <LazyLoadedVideo videoSource={item} key={index} />
+                  <LazyLoadedVideo
+                    videoSource={item}
+                    key={index}
+                    style={{ height: 90, width: 90 }}
+                  />
                 ) : (
                   <Image
                     src={item}
-                    width={90}
-                    height={90}
                     alt={`Gorrila sticker - ${stickerSet.id} - ${index}`}
+                    className={styles.stickerImage}
+                    height={90}
+                    width={90}
                   />
                 )}
               </SwiperSlide>
