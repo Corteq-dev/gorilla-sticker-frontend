@@ -4,12 +4,12 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "../i18n";
 import { useTranslation } from "react-i18next";
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import { GetLocale } from "../apis/DefaultAPI";
 import { useRouter } from "next/router";
 
 export default function App({ Component, pageProps }) {
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const router = useRouter();
 
   useEffect(() => {
@@ -31,9 +31,9 @@ export default function App({ Component, pageProps }) {
             window.Telegram.WebApp.initDataUnsafe.user.id,
           );
 
-        let locale = localStorage.getItem("locale");
-        if (!locale) locale = await GetLocale();
+        let locale = await GetLocale();
 
+        if (locale == "uk") locale = "ua";
         i18n.changeLanguage(locale);
         window.Telegram.WebApp.ready();
         window.Telegram.WebApp.expand();

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import styles from "./ReportPopup.module.scss";
 import { Modal, Form, Button, Col } from "react-bootstrap";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 import { SendReportData } from "../../../apis/DefaultAPI";
 
 export default function ReportPopup({ show, onHide, stickerSetId }) {

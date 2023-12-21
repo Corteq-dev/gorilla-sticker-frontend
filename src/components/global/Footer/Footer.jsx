@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import styles from "./Footer.module.scss";
 import { useRouter } from "next/navigation";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 
 const Footer = () => {
   const [show, setShow] = useState(true);

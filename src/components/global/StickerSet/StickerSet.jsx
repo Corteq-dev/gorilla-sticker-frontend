@@ -6,6 +6,7 @@ import Link from "next/link";
 import LazyLoadedLottie from "../LazyLoadedLottie";
 import LazyLoadedVideo from "../LazyLoadedVideo";
 import Image from "next/image";
+import { useTranslation } from "react-i18next";
 
 export default function StickerSet({
   stickerSet,
@@ -13,6 +14,8 @@ export default function StickerSet({
   onActionCallback,
   canAdd = true,
 }) {
+  const { t } = useTranslation();
+
   return (
     <Row className={styles.wrapper}>
       <Col lg={12} className={styles.header}>
@@ -69,7 +72,7 @@ export default function StickerSet({
             href={`https://t.me/addstickers/${stickerSet.name}`}
             className={styles.button}
           >
-            ADD
+            {t("ADD")}
           </a>
         )}
         <div className={styles.emojis}>
