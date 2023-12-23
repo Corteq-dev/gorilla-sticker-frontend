@@ -242,10 +242,7 @@ export default function DetailsPage() {
           className={styles.buttonAdd}
           href={`https://t.me/addstickers/${detailedStickerSet.name}`}
         >
-          {t("ADD")}{" "}
-          {detailedStickerSet.stickersUrl &&
-            detailedStickerSet.stickersUrl.length}
-          {t("STICKERS")}
+          {t("ADD STICKERS")}
         </a>
       </div>
       <div className={styles.recommendedText}>
