@@ -65,6 +65,7 @@ const SearchBar = () => {
   }, [pageOffsetY]);
 
   useEffect(() => {
+    console.log(window.location.pathname);
     setIsNew(
       router.pathname === "/"
         ? true
