@@ -158,10 +158,14 @@ const SearchBar = () => {
           {isNew == false && (
             <div className={styles.sortBar}>
               <button
-                className={styles.toggleSortOpen}
+                className={
+                  styles.toggleSortOpen +
+                  " " +
+                  (isSortOpen ? styles.rotate : "")
+                }
                 onClick={() => setIsSortOpen(!isSortOpen)}
               >
-                <BsFilter />
+                <BsFilter className={styles.sortBarIcon} />
               </button>
               {isSortOpen && (
                 <div className={styles.sortTypes}>

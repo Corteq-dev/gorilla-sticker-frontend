@@ -120,27 +120,31 @@
   position: absolute;
   right: 16px;
   top: 0;
-  /* stylelint-disable-next-line declaration-no-important */
-  color: #2481cc !important;
+  color: #2481cc;
   display: flex;
   align-items: center;
   justify-content: center;
   background: none;
   border: none;
   outline: none;
-  width: 30px;
   height: 30px;
+  transition: 250ms;
 
   span {
     width: 20px;
     height: 20px;
     pointer-events: none;
-    transition: 250ms;
-
-    &.rotate {
-      rotate: 180deg;
-    }
   }
+
+  &.rotate {
+    rotate: 180deg;
+  }
+}
+
+.sortBarIcon {
+  color: #2481cc;
+  width: 16px;
+  height: 16px;
 }
 
 .itemSortBar {
