@@ -27,9 +27,9 @@ const Footer = () => {
 
   useEffect(() => {
     setIsFav(
-      window.location.pathname === "/favourites"
+      router.pathname === "/favourites"
         ? true
-        : window.location.pathname === "/mystickers"
+        : router.pathname === "/mystickers"
         ? false
         : null,
     );

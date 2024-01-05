@@ -66,9 +66,9 @@ const SearchBar = () => {
 
   useEffect(() => {
     setIsNew(
-      window.location.pathname === "/"
+      router.pathname === "/"
         ? true
-        : window.location.pathname === "/popular"
+        : router.pathname === "/popular"
         ? false
         : null,
     );
