@@ -26,11 +26,10 @@ const Footer = () => {
   }, [pageOffsetY]);
 
   useEffect(() => {
-    console.log(window.location.pathname);
     setIsFav(
-      window.location.pathname === "/favourites"
+      window.location.pathname == "/favourites"
         ? true
-        : window.location.pathname === "/mystickers"
+        : window.location.pathname == "/mystickers"
         ? false
         : null,
     );

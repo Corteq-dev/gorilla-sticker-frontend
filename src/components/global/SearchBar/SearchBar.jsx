@@ -65,11 +65,10 @@ const SearchBar = () => {
   }, [pageOffsetY]);
 
   useEffect(() => {
-    console.log(window.location.pathname);
     setIsNew(
-      router.pathname === "/"
+      window.location.pathname == "/"
         ? true
-        : router.pathname === "/popular"
+        : window.location.pathname == "/popular"
         ? false
         : null,
     );
