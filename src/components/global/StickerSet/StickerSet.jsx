@@ -32,6 +32,7 @@ export default function StickerSet({
         <Swiper
           slidesPerView="auto"
           spaceBetween={10}
+          speed={5000}
           freeMode={true}
           grabCursor={true}
           scrollbar={{
