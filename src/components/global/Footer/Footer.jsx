@@ -2,8 +2,10 @@ import React, { useState, useEffect, useRef } from "react";
 import styles from "./Footer.module.scss";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "next-i18next";
+import { useStickers } from "../../../contexts/StickerContext";
 
 const Footer = () => {
+  const { currentPage } = useStickers();
   const [show, setShow] = useState(true);
   const [pageOffsetY, setPageOffsetY] = useState(0);
   const [isFav, setIsFav] = useState(null);
@@ -27,14 +29,14 @@ const Footer = () => {
 
   useEffect(() => {
     setIsFav(
-      window.location.pathname == "/favourites"
+      currentPage == "favourites"
         ? true
-        : window.location.pathname == "/mystickers"
+        : currentPage == "mystickers"
         ? false
         : null,
     );
     setTimeout(() => setLock(false), 500);
-  }, []);
+  }, [currentPage]);
 
   return (
     <>

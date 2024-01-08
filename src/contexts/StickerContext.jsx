@@ -12,6 +12,7 @@ export function StickerProvider({ children }) {
   const [canLoad, setCanLoad] = useState(false);
   const [page, setPage] = useState(-1);
   const [dateFilter, setDateFilter] = useState(0);
+  const [currentPage, setCurrentPage] = useState(null);
 
   const [detailedStickerSet, setDetailedStickerSet] = useState({});
 
@@ -69,6 +70,8 @@ export function StickerProvider({ children }) {
         setPage,
         dateFilter,
         setDateFilter,
+        currentPage,
+        setCurrentPage,
       }}
     >
       {children}

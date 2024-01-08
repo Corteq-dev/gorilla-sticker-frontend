@@ -1,4 +1,3 @@
-import { StickerProvider } from "../../contexts/StickerContext";
 import DetailsPage from "../../components/page/Details/DetailsPage";
 import { useEffect } from "react";
 
@@ -13,9 +12,5 @@ export default function Home() {
     };
   }, []);
 
-  return (
-    <StickerProvider>
-      <DetailsPage />
-    </StickerProvider>
-  );
+  return <DetailsPage />;
 }

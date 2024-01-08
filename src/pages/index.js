@@ -1,15 +1,20 @@
 import IndexPage from "../components/page/Index/IndexPage";
-import { StickerProvider } from "../contexts/StickerContext";
 import SearchBar from "../components/global/SearchBar/SearchBar";
-import { Suspense } from "react";
 import Footer from "../components/global/Footer/Footer";
+import { useEffect } from "react";
+import { useStickers } from "../contexts/StickerContext";
 
 export default function Home() {
+  const { setCurrentPage } = useStickers();
+  useEffect(() => {
+    setCurrentPage("home");
+  }, []);
+
   return (
-    <StickerProvider>
+    <>
       <SearchBar />
       <IndexPage />
       <Footer />
-    </StickerProvider>
+    </>
   );
 }

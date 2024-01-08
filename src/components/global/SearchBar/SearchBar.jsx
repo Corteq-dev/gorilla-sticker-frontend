@@ -21,6 +21,7 @@ const SearchBar = () => {
     setCanLoad,
     setPage,
     setDateFilter,
+    currentPage,
   } = useStickers();
   const didMountRef = useRef(false);
 
@@ -66,14 +67,10 @@ const SearchBar = () => {
 
   useEffect(() => {
     setIsNew(
-      window.location.pathname == "/"
-        ? true
-        : window.location.pathname == "/popular"
-        ? false
-        : null,
+      currentPage == "home" ? true : currentPage == "popular" ? false : null,
     );
     setTimeout(() => setLock(false), 500);
-  }, []);
+  }, [currentPage]);
 
   useEffect(() => {
     if (didMountRef.current) {
