@@ -23,6 +23,7 @@ export default function IndexPage() {
     page,
     setPage,
     dateFilter,
+    setCurrentPage,
   } = useStickers();
   const [canDoAction, setCanDoAction] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
@@ -78,6 +79,7 @@ export default function IndexPage() {
 
   useEffect(() => {
     setCanLoad(true);
+    setCurrentPage("popular");
   }, []);
 
   useEffect(() => {

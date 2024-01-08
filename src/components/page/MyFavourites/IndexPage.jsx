@@ -23,6 +23,7 @@ export default function IndexPage() {
     page,
     setPage,
     setStickerSets,
+    setCurrentPage,
   } = useStickers();
   const [canDoAction, setCanDoAction] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
@@ -71,6 +72,7 @@ export default function IndexPage() {
 
   useEffect(() => {
     setCanLoad(true);
+    setCurrentPage("favourites");
   }, []);
 
   return (

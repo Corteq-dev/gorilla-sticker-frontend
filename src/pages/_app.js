@@ -4,10 +4,9 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "../i18n";
 import { useTranslation } from "react-i18next";
-import { Suspense, useEffect } from "react";
+import { useEffect } from "react";
 import { GetLocale } from "../apis/DefaultAPI";
 import { useRouter } from "next/router";
-import { StickerProvider } from "../contexts/StickerContext";
 
 export default function App({ Component, pageProps }) {
   const { i18n } = useTranslation();
@@ -59,9 +58,5 @@ export default function App({ Component, pageProps }) {
     };
   }, []);
 
-  return (
-    <StickerProvider>
-      <Component {...pageProps} />
-    </StickerProvider>
-  );
+  return <Component {...pageProps} />;
 }
