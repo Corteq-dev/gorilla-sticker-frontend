@@ -54,7 +54,7 @@ export default function DetailsPage() {
   });
   useEffect(() => {
     async function fetchData(page) {
-      if (!canLoad || !detailedStickerSet.id) return;
+      if (!canLoad || !detailedStickerSet || !detailedStickerSet.id) return;
 
       setCanLoad(false);
       setIsLoading(true);
@@ -124,6 +124,8 @@ export default function DetailsPage() {
       setCanDoAction(true);
     }, 500);
   }
+
+  if (!detailedStickerSet) return null;
 
   return (
     <Container className={styles.container}>
