@@ -17,4 +17,20 @@ module.exports = {
       },
     ],
   },
+  webpack5: true,
+  webpack: (config) => {
+    config.resolve.fallback = { fs: false };
+
+    return config;
+  },
+  useFileSystemPublicRoutes: false,
+
+  async rewrites() {
+    return [
+      {
+        source: "/:any*",
+        destination: "/",
+      },
+    ];
+  },
 };

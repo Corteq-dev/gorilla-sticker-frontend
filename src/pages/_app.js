@@ -55,6 +55,7 @@ export default function App({ Component, pageProps }) {
 
     return () => {
       document.body.removeChild(script);
+      document.body.removeChild(tgsPlayerScript);
     };
   }, []);
 
